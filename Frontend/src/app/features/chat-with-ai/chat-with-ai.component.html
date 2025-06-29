@@ -1,0 +1,66 @@
+<div class="chat-container">
+  <!-- Sidebar for Chat Rooms -->
+  <div class="sidebar">
+    <h3 class="font-bold text-2xl mb-5">Skintelligent</h3>
+    <ul>
+      <li
+        *ngFor="let room of chatRooms"
+        (click)="selectRoom(room)"
+        [class.active]="room.id === selectedRoom.id"
+      >
+        {{ room.name }}
+      </li>
+    </ul>
+  </div>
+  <!-- Main Chat Area -->
+  <div class="main-content relative">
+    <div class="chat-header">
+      <h2>Chat with AI</h2>
+    </div>
+    <div
+      class="flex justify-center bg-white absolute duration-500"
+      [class.top-[5rem]]="firstMessage"
+      [class.left-[20rem]]="firstMessage"
+      [class.top-[3rem]]="!firstMessage"
+      [class.left-[1rem]]="!firstMessage"
+    >
+      <img
+        src="assets/chat_banner.jpg"
+        class="w-[22rem] h-[22rem] duration-500"
+        [class.w-[22rem]]="firstMessage"
+        [class.h-[22rem]]="firstMessage"
+        [class.w-[12rem]]="!firstMessage"
+        [class.h-[12rem]]="!firstMessage"
+        alt=""
+      />
+    </div>
+    <div
+      class="chat-box duration-500"
+      [class.mt-[25rem]]="firstMessage"
+      [class.mt-[15rem]]="!firstMessage"
+      #chatBox
+    >
+      <div
+        *ngFor="let message of messages"
+        class="message"
+        [ngClass]="{
+          'ai-message': message.sender === 'AI',
+          'user-message': message.sender === 'User'
+        }"
+      >
+        <p>{{ message.text }}</p>
+        <small *ngIf="message.sender === 'AI' && message.sources"
+          >Sources: {{ message.sources }}</small
+        >
+      </div>
+    </div>
+    <div class="chat-input">
+      <input
+        [(ngModel)]="newMessage"
+        placeholder="Type your question here..."
+        (keyup.enter)="sendMessage()"
+      />
+      <button (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+</div>

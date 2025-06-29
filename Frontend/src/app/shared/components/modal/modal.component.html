@@ -1,0 +1,6 @@
+<div *ngIf="isOpen" (click)="close()" @fadeInOut
+  class="fixed inset-0 bg-[#0000004d] flex justify-center items-center z-[1000]">
+  <div @slideUpDown (click)="stopPropagation($event)" class=" h-auto w-full relative ">
+    <ng-content></ng-content>
+  </div>
+</div>

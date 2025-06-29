@@ -1,0 +1,30 @@
+@use "@angular/material" as mat;
+
+.clip {
+  -webkit-clip-path: circle(72.5% at 64% 18%);
+  clip-path: circle(72.5% at 64% 18%);
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #6a43ff !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+  /*change color of underline when focused*/
+  background-color: #6a43ff !important;
+}
+::ng-deep
+  .mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs
+  > .mat-mdc-tab-header
+  .mat-mdc-tab {
+  display: none;
+}
+
+input {
+  border: 1px solid gainsboro;
+  padding: 0.5rem;
+  padding-left: 0.8rem;
+  border-radius: 0.5rem;
+  width: 100%;
+}

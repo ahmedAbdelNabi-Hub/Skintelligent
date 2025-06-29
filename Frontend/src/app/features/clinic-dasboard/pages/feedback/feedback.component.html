@@ -1,0 +1,80 @@
+<div class="mt-20 flex justify-center" *ngIf="loading">
+  <app-loader></app-loader>
+</div>
+<div
+  *ngIf="!loading && (!doctors || doctors.length === 0)"
+  class="flex flex-col items-center justify-center mt-20"
+>
+  <i class="bx bxs-user-x text-blue-400 bx-lg"></i>
+  <p class="text-gray-500 text-lg font-medium">
+    No doctors found for this clinic.
+  </p>
+</div>
+<div
+  *ngIf="!loading"
+  class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4"
+>
+  <ng-container *ngIf="doctors.length > 0">
+    <app-doctor-card
+      *ngFor="let doctor of doctors"
+      [doctor]="doctor"
+    ></app-doctor-card>
+  </ng-container>
+
+  <!-- <app-doctor-card
+    [doctor]="{
+      id: 4,
+      name: 'Dr. Ali Khan',
+      specialty: 'Orthopedic Surgeon',
+      hospital: 'Green Valley Hospital',
+      imageUrl:
+        'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+      rate: 4
+    }"
+  ></app-doctor-card>
+  <app-doctor-card
+    [doctor]="{
+      id: 3,
+      name: 'Dr. Saeed ALI',
+      specialty: 'Orthopedic Surgeon',
+      hospital: 'Green Valley Hospital',
+      imageUrl:
+        'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+      rate: 3
+    }"
+  ></app-doctor-card>
+  <app-doctor-card
+    [doctor]="{
+      id: 1,
+      name: 'Dr. Ali Khan',
+      specialty: 'Orthopedic Surgeon',
+      hospital: 'Green Valley Hospital',
+      imageUrl:
+        'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+      rate: 2
+    }"
+  ></app-doctor-card>
+  <app-doctor-card
+    [doctor]="{
+      id: 2,
+      name: 'Dr. Ahmed Saeed',
+      specialty: 'Orthopedic Surgeon',
+      hospital: 'Green Valley Hospital',
+      imageUrl: 'https://i.pravatar.cc/150?img=12',
+      rate: 0
+    }"
+  ></app-doctor-card>
+
+  <app-doctor-card
+    [doctor]="{
+      id: 2,
+      name: 'Dr. Saeed ALI',
+      specialty: 'Orthopedic Surgeon',
+      hospital: 'Green Valley Hospital',
+      imageUrl:
+        'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80',
+      rate: 5
+    }"
+  ></app-doctor-card> -->
+</div>
+

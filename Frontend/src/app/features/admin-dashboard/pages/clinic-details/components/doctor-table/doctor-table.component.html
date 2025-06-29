@@ -1,0 +1,343 @@
+<!-- Hero -->
+<div
+    class="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:size-full before:-z-1 before:transform before:-translate-x-1/2">
+    <div class="py-4 px-4">
+        <!-- Announcement Banner -->
+        <div class="flex items-center">
+            <a class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 focus:outline-hidden focus:border-gray-300"
+                href="#">
+                Export the Capital Clinic
+                <span class="flex items-center gap-x-1">
+                    <span class="border-s border-gray-200 text-blue-600 ps-2">Export</span>
+                    <svg class="shrink-0 size-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                </span>
+            </a>
+            <div class="mt-1 px-4  ">
+                <h1 class="block text-gray-800 text-2xl ">
+                   Doctors
+                </h1>
+            </div>
+        </div>
+     
+    </div>
+</div>
+<div class="flex  items-center justify-center  " *ngIf="(_asyncDataHandler.isLoading$ | async)">
+    <span class="loader"></span>
+</div>
+<div class="mx-auto" *ngIf="!(_asyncDataHandler.isLoading$ | async)">
+    <!-- Card -->
+    <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden">
+                    <!-- Header -->
+                    <div
+                        class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800">
+                                DOCTORS
+                            </h2>
+                            <p class="text-sm text-gray-600">
+                                Create teams, edit, download and more.
+                                <span class="text-blue-500">You Have All Perimations</span>
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="inline-flex gap-x-2">
+                                <div class="hs-dropdown [--placement:bottom-right] relative inline-block">
+                                    <button id="hs-as-table-table-export-dropdown" type="button"
+                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+                                        aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="7 10 12 15 17 10" />
+                                            <line x1="12" x2="12" y1="15" y2="3" />
+                                        </svg>
+                                        Export
+                                    </button>
+                                </div>
+
+               
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Full Name
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Address Name
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        License Number
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Qualification
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Rated
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Patients
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-end"></th>
+                            </tr>
+                        </thead>
+
+                        <tbody  class="divide-y divide-gray-200">
+                            <tr *ngFor="let doctor of Doctors()"class="bg-white hover:bg-gray-50">
+                                <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2">
+                                            <div class="block text-sm text-blue-600 decoration-2 hover:underline">
+                                                #{{doctor.firstName}} {{doctor.lastName}}</div>
+                                        </div>
+                                       
+                                    </a>
+                                </td>
+                                <td class="h-px w-72 min-w-72">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2">
+                                            <p class="text-sm text-gray-500">Our group promotes and sells products and
+                                                services by leveraging online marketing tactics</p>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2">
+                                            <span
+                                                class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-gray-100 text-gray-800">
+                                                {{doctor.licenseNumber}}
+                                          </span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2">
+                                            <span
+                                                class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-gray-100 text-gray-800">
+                                                {{doctor.qualification}} 
+                                          </span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2 flex gap-x-1">
+                                            <svg class="shrink-0 size-3 text-gray-800"
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <svg class="shrink-0 size-3 text-gray-800"
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <svg class="shrink-0 size-3 text-gray-800"
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <svg class="shrink-0 size-3 text-gray-800"
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                            <svg class="shrink-0 size-3 text-transparent"
+                                                xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+                                            </svg>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2 flex -space-x-2">
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="hs-tooltip-toggle inline-block size-6 rounded-full ring-2 ring-white"
+                                                    src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                                                    alt="Avatar">
+                                          
+                                            </div>
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="inline-block size-6 rounded-full ring-2 ring-white"
+                                                    src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                                                    alt="Avatar">
+                                             
+                                            </div>
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="inline-block size-6 rounded-full ring-2 ring-white"
+                                                    src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80"
+                                                    alt="Avatar">
+                                              
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <div class="px-6 py-2">
+                                        <div class="relative inline-block">
+                                            <button id="hs-table-dropdown-1" type="button"
+                                                class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm"
+                                                aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+                                                <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+                                                    width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <circle cx="12" cy="12" r="1" />
+                                                    <circle cx="19" cy="12" r="1" />
+                                                    <circle cx="5" cy="12" r="1" />
+                                                </svg>
+                                            </button>
+                                            <div class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden divide-y divide-gray-200 min-w-40 z-20 bg-white shadow-2xl rounded-lg p-2 mt-2"
+                                                role="menu" aria-orientation="vertical"
+                                                aria-labelledby="hs-table-dropdown-1">
+                                                <div class="py-2 first:pt-0 last:pb-0">
+                                                    <span
+                                                        class="block py-2 px-3 text-xs font-medium uppercase text-gray-400">
+                                                        Actions
+                                                    </span>
+                                                    <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                                                        href="#">
+                                                        Rename team
+                                                    </a>
+                                                    <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                                                        href="#">
+                                                        Add to favorites
+                                                    </a>
+                                                    <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100"
+                                                        href="#">
+                                                        Archive team
+                                                    </a>
+                                                </div>
+                                                <div class="py-2 first:pt-0 last:pb-0">
+                                                    <a class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500"
+                                                        href="#">
+                                                        Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div
+                        class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
+                        <div>
+                            <p class="text-sm text-gray-600">
+                                <span class="font-semibold text-gray-800">6</span> results
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="inline-flex gap-x-2">
+                                <button type="button"
+                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m15 18-6-6 6-6" />
+                                    </svg>
+                                    Prev
+                                </button>
+
+                                <button type="button"
+                                    class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                                    Next
+                                    <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="m9 18 6-6-6-6" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Card -->
+</div>
+<!-- End Table Section -->

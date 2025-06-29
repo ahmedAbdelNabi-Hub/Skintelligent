@@ -1,0 +1,48 @@
+<div class="mini-chat-container w-full opacity-0 left-1/2  transform -translate-x-1/2  -bottom-[21rem]"
+  [ngClass]="{ 'bottom-0 opacity-100': isOpened }">
+  <div
+    class="mini-chat-header w-[350px] md:w-[500px] bg-white border-b border-gray-200 px-2 py-1 flex items-center justify-between"
+    dir="ltr">
+    <div class="text-lg font-semibold text-gray-800 flex items-center gap-2">
+      <i class="bx bx-chat text-blue-600 text-xl"></i>
+      <span>Chat with</span>
+      <span class="">{{ patientName }}</span>
+    </div>
+    <button class=" " aria-label="Close chat" (click)="onClose()">
+      <i class="bx bx-x text-2xl"></i>
+    </button>
+  </div>
+
+  <div class="mini-chat-messages h-[350px] w-[350px] md:w-[500px] overflow-y-auto p-4 space-y-4" dir="rtl">
+    <div class="flex   items-center   justify-center " >
+      <img class="size-30 rounded-lg"  [src]="'http://skintelligent.runasp.net/'+''+conversation?.imageBase64"
+        alt="Chat Image" style="max-width: 300px;" />
+    </div>
+    <div *ngFor="let msg of messages" [ngClass]="{
+        'justify-start': msg.role === 'user',
+        'justify-end': msg.role === 'assistant'
+      }" class="flex" [class.hidden]="msg.role === 'system'">
+      <div [ngClass]="{
+          'bg-white text-[#004a75] self-start': msg.role === 'user',
+          'bg-[#eeee] text-[#0f5132] self-end': msg.role === 'assistant'
+        }" class="rounded-xl px-4 py-2 max-w-[80%]">
+        <div class="mb-1 text-xs font-bold">
+          {{ msg.role === 'user' ? 'المريض' : 'المساعد' }}
+        </div>
+        <p class="text-sm leading-relaxed whitespace-pre-wrap break-words">{{ msg.content }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="mini-chat-input-area">
+    <input
+      [(ngModel)]="newMessage"
+      (keydown.enter)="sendMessage()"
+      placeholder="Type a message..."
+      class="mini-chat-input text-sm"
+    />
+    <button (click)="sendMessage()" class="mini-chat-send-btn">
+      <i class="bx bx-send"></i>
+    </button>
+  </div> -->
+</div>

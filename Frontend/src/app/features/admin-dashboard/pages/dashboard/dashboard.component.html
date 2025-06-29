@@ -1,0 +1,313 @@
+<main class="px-4   mx-auto w-full">
+  <app-dashboard-stats-card [cards]=" [
+  {
+    icon: 'bxs-group',
+    title: 'Total Doctors',
+    subTitle: overview()?.totalDoctors,
+  },
+  {
+    icon: 'bx-bed',
+    title: 'Total patients',
+    subTitle: overview()?.totalPatients
+  },
+  {
+    icon: 'bx-pulse',
+    title: 'Total Clinics',
+    subTitle: overview()?.totalClinics,
+  },
+  {
+    icon: 'bx-clinic',
+    title: 'Total Appointments',
+    subTitle: overview()?.totalAppointments,
+  },
+]"></app-dashboard-stats-card>
+
+  <div class="flex flex-col xl:flex-row w-full mt-5 gap-3">
+    <div id="chart" class="w-full xl:w-[60%]">
+      <app-radar-chart *ngIf="doctorGrowth()?.length || patientGrowth()?.length || appointmentVolume()?.length"
+        [doctorGrowth]="doctorGrowth()" [patientGrowth]="patientGrowth()" [appointmentVolume]="appointmentVolume()">
+      </app-radar-chart>
+    </div>
+    <div class="border w-full xl:w-[50%]  border-gray-200 bg-white rounded-lg px-2 py-1 flex flex-col space-y-2 ">
+      <app-recently-doctor></app-recently-doctor>
+    </div>
+  </div>
+
+
+  <app-dynamic-table [data]="unApprovedClinics!"></app-dynamic-table>
+  <!-- Payment Table -->
+  <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200">
+      <h3 class="text-lg font-medium text-gray-900">Clinic Payments</h3>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Clinic</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Account Type</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Status
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Payment Method
+            </th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Upgrade Date</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Expiry Date</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+          <!-- Pro Account - Confirmed Payment -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img class="h-10 w-10 rounded-full object-cover"
+                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=40&h=40&fit=crop&crop=center"
+                  alt="Clinic">
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">City Medical Center</div>
+                  <div class="text-sm text-gray-500">contact citymedical.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                <i class="fas fa-crown mr-1"></i>Pro
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <i class="fas fa-check-circle mr-1"></i>Confirmed
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$299.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <i class="fab fa-cc-visa mr-1 text-blue-600"></i>Visa ****4242
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-01-15</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-01-15</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button class="text-blue-600 hover:text-blue-900 mr-3 p-1" title="View Details">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="text-green-600 hover:text-green-900 mr-3 p-1" title="Download Invoice">
+                <i class="fas fa-download"></i>
+              </button>
+              <button class="text-red-600 hover:text-red-900 p-1" title="Refund">
+                <i class="fas fa-undo"></i>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Free Account -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img class="h-10 w-10 rounded-full object-cover"
+                  src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=40&h=40&fit=crop&crop=center"
+                  alt="Clinic">
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">Health Plus Clinic</div>
+                  <div class="text-sm text-gray-500">info healthplus.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                <i class="fas fa-user mr-1"></i>Free
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                <i class="fas fa-minus mr-1"></i>N/A
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$0.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button
+                class="text-blue-600 hover:text-blue-900 px-3 py-1 border border-blue-600 rounded text-xs font-medium hover:bg-blue-50"
+                title="Upgrade to Pro">
+                <i class="fas fa-arrow-up mr-1"></i>Upgrade
+              </button>
+            </td>
+          </tr>
+
+          <!-- Pro Account - Pending Payment -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img class="h-10 w-10 rounded-full object-cover"
+                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=40&h=40&fit=crop&crop=center"
+                  alt="Clinic">
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">Elite Dermatology</div>
+                  <div class="text-sm text-gray-500">admin elitederma.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                <i class="fas fa-crown mr-1"></i>Pro
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+                <i class="fas fa-clock mr-1"></i>Pending
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$299.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <i class="fab fa-cc-mastercard mr-1 text-red-600"></i>Mastercard ****8888
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024-06-01</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-06-01</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button class="text-blue-600 hover:text-blue-900 mr-3 p-1" title="View Details">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button class="text-green-600 hover:text-green-900 mr-3 p-1" title="Confirm Payment">
+                <i class="fas fa-check"></i>
+              </button>
+              <button class="text-red-600 hover:text-red-900 p-1" title="Cancel Payment">
+                <i class="fas fa-times"></i>
+              </button>
+            </td>
+          </tr>
+
+          <!-- Pro Account - Expired -->
+          <tr class="hover:bg-gray-50 bg-red-50">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img class="h-10 w-10 rounded-full object-cover"
+                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=40&h=40&fit=crop&crop=center"
+                  alt="Clinic">
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">Premium Care Center</div>
+                  <div class="text-sm text-gray-500">support premiumcare.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                <i class="fas fa-crown mr-1"></i>Pro (Expired)
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
+                <i class="fas fa-exclamation-triangle mr-1"></i>Expired
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">$299.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <i class="fab fa-cc-visa mr-1 text-blue-600"></i>Visa ****1234
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2023-01-15</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-red-600 font-medium">2024-01-15</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button class="text-blue-600 hover:text-blue-900 mr-3 p-1" title="View Details">
+                <i class="fas fa-eye"></i>
+              </button>
+              <button
+                class="text-orange-600 hover:text-orange-900 px-3 py-1 border border-orange-600 rounded text-xs font-medium hover:bg-orange-50"
+                title="Renew Subscription">
+                <i class="fas fa-redo mr-1"></i>Renew
+              </button>
+            </td>
+          </tr>
+
+          <!-- Another Free Account -->
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <img class="h-10 w-10 rounded-full object-cover"
+                  src="https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=40&h=40&fit=crop&crop=center"
+                  alt="Clinic">
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">Community Health Hub</div>
+                  <div class="text-sm text-gray-500">hellocommunityhub.com</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                <i class="fas fa-user mr-1"></i>Free
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                <i class="fas fa-minus mr-1"></i>N/A
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">$0.00</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">-</td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button
+                class="text-blue-600 hover:text-blue-900 px-3 py-1 border border-blue-600 rounded text-xs font-medium hover:bg-blue-50"
+                title="Upgrade to Pro">
+                <i class="fas fa-arrow-up mr-1"></i>Upgrade
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+      <div class="flex items-center justify-between">
+        <div class="flex-1 flex justify-between sm:hidden">
+          <button
+            class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+            Previous
+          </button>
+          <button
+            class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+            Next
+          </button>
+        </div>
+        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+          <div>
+            <p class="text-sm text-gray-700">
+              Showing <span class="font-medium">1</span> to <span class="font-medium">5</span> of <span
+                class="font-medium">23</span> results
+            </p>
+          </div>
+          <div>
+            <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+              <button
+                class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <button
+                class="bg-blue-50 border-blue-500 text-blue-600 relative inline-flex items-center px-4 py-2 border text-sm font-medium">1</button>
+              <button
+                class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">2</button>
+              <button
+                class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium">3</button>
+              <button
+                class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

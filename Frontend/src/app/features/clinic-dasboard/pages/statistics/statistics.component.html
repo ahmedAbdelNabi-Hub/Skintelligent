@@ -1,0 +1,116 @@
+<app-dashboard-stats-card [cards]="[
+  {
+    icon: 'bxs-group',
+    title: 'Total Doctors',
+    subTitle: clinicDashboard?.totalDoctors,
+  },
+  {
+    icon: 'bx-bed',
+    title: 'Total Patients',
+    subTitle: clinicDashboard?.totalPatients,
+  },
+  {
+    icon: 'bx-clinic',
+    title: 'Total Appointments',
+    subTitle: clinicDashboard?.totalAppointments,
+  },
+  {
+    icon: 'bx-star',
+    title: 'Total Reviews',
+    subTitle: clinicDashboard?.totalReview,
+  }
+]"></app-dashboard-stats-card>
+
+<!-- Monthly Appointments Chart -->
+<div class="mt-6">
+<div class="flex items-center justify-between mb-3 px-3">
+  <div class="flex items-center gap-1.5">
+    <i class='bx bx-line-chart text-lg text-blue-500'></i>
+    <h3 class="text-base font-medium text-gray-700">Monthly Appointments</h3>
+  </div>
+  <div class="flex items-center text-gray-500 text-xs gap-1">
+    <i class='bx bx-calendar'></i>
+    <span>Yearly trends</span>
+  </div>
+</div>
+
+  <app-area-chart title="Monthly Appointments" color="rgba(59, 130, 246, 0.2)"
+    borderColor="rgb(59, 130, 246)"></app-area-chart>
+</div>
+
+<!-- Doctor Performance Table -->
+<div class="mt-6">
+  <!-- Table Header Section -->
+  <div class="flex items-center justify-between mb-4 px-4">
+    <div class="flex items-center">
+      <i class='bx bx-table text-2xl text-blue-600 mr-2'></i>
+      <h2 class="text-xl font-semibold text-gray-800">Doctor Performance Overview</h2>
+    </div>
+    <div class="flex items-center text-gray-600">
+      <i class='bx bx-info-circle mr-2'></i>
+      <span class="text-sm">Monthly performance metrics for all doctors</span>
+    </div>
+  </div>
+
+  <!-- Table Content -->
+  <div class="overflow-x-auto rounded-lg border border-gray-200">
+    <table class="min-w-full bg-white rounded-lg overflow-hidden">
+      <thead>
+        <tr class="bg-gray-50 border-b border-gray-200">
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 border-x border-gray-200">
+            <div class="flex items-center">
+              <i class='bx bx-user-circle mr-2'></i>
+              Doctor Name
+            </div>
+          </th>
+          <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 border-x border-gray-200">
+            <div class="flex items-center">
+              <i class='bx bx-envelope mr-2'></i>
+              Email
+            </div>
+          </th>
+          <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700 border-x border-gray-200">
+            <div class="flex items-center justify-center">
+              <i class='bx bx-star mr-2'></i>
+              Rating
+            </div>
+          </th>
+          <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700 border-x border-gray-200">
+            <div class="flex items-center justify-center">
+              <i class='bx bx-group mr-2'></i>
+              Total Patients
+            </div>
+          </th>
+          <th class="px-6 py-4 text-center text-sm font-semibold text-gray-700 border-x border-gray-200">
+            <div class="flex items-center justify-center">
+              <i class='bx bx-calendar mr-2'></i>
+              Appointments This Month
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+        <tr *ngFor="let doctor of doctorPerformanceData" 
+            class="hover:bg-gray-50 transition-colors duration-200">
+          <td class="px-6 py-4 border-x border-gray-200">
+            <span class="text-sm font-medium text-gray-900">{{doctor.doctorName}}</span>
+          </td>
+          <td class="px-6 py-4 border-x border-gray-200">
+            <span class="text-sm text-gray-600">{{doctor.email}}</span>
+          </td>
+          <td class="px-6 py-4 text-center border-x border-gray-200">
+            <span class="inline-flex px-3 py-1 text-sm font-medium text-gray-700 bg-gray-100 rounded-full">
+              {{doctor.avgRating | number:'1.1-1'}}
+            </span>
+          </td>
+          <td class="px-6 py-4 text-center border-x border-gray-200">
+            <span class="text-sm font-medium text-gray-900">{{doctor.totalPatients}}</span>
+          </td>
+          <td class="px-6 py-4 text-center border-x border-gray-200">
+            <span class="text-sm font-medium text-gray-900">{{doctor.appointmentsThisMonth}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="flex justify-center mb-2">
+  <i
+    *ngFor="let star of getStarArray(rating)"
+    class="bx bxs-star text-yellow-400 text-lg"
+  ></i>
+  <i
+    *ngFor="let star of getStarArray(5 - rating)"
+    class="bx bx-star text-gray-300 text-lg"
+  ></i>
+</div>

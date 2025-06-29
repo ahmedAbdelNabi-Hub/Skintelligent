@@ -1,0 +1,212 @@
+<section>
+  <div
+    class="px-6 relative overflow-hidden py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200"
+  >
+    <div>
+      <h2 class="text-xl font-semibold text-gray-800">Appointments</h2>
+      <p class="text-sm text-gray-600">
+        there is the latest update for the last 7 days. check now
+      </p>
+    </div>
+    <div>
+      <button
+        (click)="showDialog()"
+        class="py-2 px-3 bg-green-600 text-green-100 z-[100] inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200"
+      >
+        Add Appointments slots
+      </button>
+    </div>
+  </div>
+  <section class="relative mt-4">
+    <div class="w-full mx-auto px-4">
+      <div class="flex items-center justify-between gap-3 mb-5">
+        <div class="flex items-center gap-4">
+          <h5 class="text-xl font-semibold text-gray-900">
+            {{ today | date : "MM-dd-yyyy" }}
+          </h5>
+          <div class="flex items-center gap-2">
+            <label
+              class="hidden md:flex py-1 pr-3 rounded-md bg-gray-50 border border-gray-300 items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-500 hover:bg-gray-100 cursor-pointer"
+            >
+              <input
+                (change)="onDateChange($event)"
+                [value]="formattedToday"
+                type="date"
+                class="bg-transparent py-0 border-none outline-none cursor-pointer"
+              />
+            </label>
+          </div>
+        </div>
+<div class="flex items-center gap-2">
+  <button 
+    (click)="refreashAppointments()"
+    class="p-2 rounded-md bg-gray-50 border border-gray-300 hover:bg-gray-100 transition-all duration-300"
+  >
+    <i class="bx bx-refresh text-gray-600"></i>
+  </button>
+</div>
+      </div>
+      <app-appointments-calendar 
+        [selectedDate]="selectedDate"
+        [change]="reRednder()"
+      ></app-appointments-calendar>
+    </div>
+  </section>
+</section>
+
+<p-dialog [modal]="true" [(visible)]="visible" [style]="{ width: '40rem' }">
+  <form
+    (click)="stopPropagation($event)"
+    [formGroup]="appointmentForm"
+    (ngSubmit)="onSubmit()"
+    class="max-w-2xl mx-auto bg-white px-1 md:px-6 py-1 space-y-6"
+  >
+    <div class="flex items-center justify-between">
+      <h2 class="text-[18px] font-thin text-gray-800">Create Appointment</h2>
+      <!-- Submit Button -->
+      <div class="">
+        <button
+          (click)="hideDialog()"
+          type="submit"
+          [disabled]="appointmentForm.invalid"
+          class="w-full py-1 px-4 bg-green-700 hover:bg-green-700 text-green-50 font-normal rounded-md shadow-sm disabled:opacity-50"
+        >
+          Create Appointment
+        </button>
+      </div>
+    </div>
+    <!-- Daily Start Time -->
+    <div class="flex items-center space-x-2 max-w-2xl w-full">
+      <div class="w-[50%]">
+        <div class="flex space-x-2 items-center">
+          <i class="bx bx-time-five"></i>
+          <label
+            for="dailyStartTime"
+            class="block text-sm font-medium text-gray-700"
+            >Daily Start Time</label
+          >
+        </div>
+        <input
+          id="dailyStartTime"
+          formControlName="dailyStartTime"
+          type="time"
+          class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <!-- Daily End Time -->
+      <div class="w-[50%]">
+        <div class="flex space-x-2 items-center">
+          <i class="bx bx-time-five"></i>
+          <label
+            for="dailyEndTime"
+            class="block text-sm font-medium text-gray-700"
+            >Daily End Time</label
+          >
+        </div>
+        <input
+          id="dailyEndTime"
+          formControlName="dailyEndTime"
+          type="time"
+          class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+    </div>
+    <div class="w-[50%]">
+      <div class="flex space-x-2 items-center">
+        <i class="bx bx-time-five"></i>
+        <label
+          for="split"
+          class="block text-sm font-medium text-gray-700"
+          >split Range</label
+        >
+      </div>
+      <input
+        id="split"
+        formControlName="split"
+        placeholder="split Range"
+        type="number"
+        class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Day -->
+    <div>
+      <div class="flex items-center space-x-2">
+        <i class="bx bxs-select-multiple"></i>
+        <label for="day" class="block text-sm font-medium text-gray-700"
+          >Day of the Week</label
+        >
+      </div>
+      <select
+        id="day"
+        formControlName="day"
+        class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+      >
+        <option [value]="0">Sunday</option>
+        <option [value]="1">Monday</option>
+        <option [value]="2">Tuesday</option>
+        <option [value]="3">Wednesday</option>
+        <option [value]="4">Thursday</option>
+        <option [value]="5">Friday</option>
+        <option [value]="6">Saturday</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="startFromDate" class="block text-sm font-medium text-gray-700"
+        >Note Appointment
+        <span class="text-[10px] text-blue-500">(Optional)</span></label
+      >
+      <input
+        id="Note"
+        formControlName="Note"
+        type="text"
+        placeholder="Note"
+        class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Is Repeating -->
+    <div class="flex items-center">
+      <input
+        id="isRepeating"
+        formControlName="isRepeating"
+        type="checkbox"
+        class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+      />
+      <label for="isRepeating" class="ml-2 block text-sm text-gray-700"
+        >Is Repeating</label
+      >
+    </div>
+
+    <!-- Start From Date -->
+    <div>
+      <label for="startFromDate" class="block text-sm font-medium text-gray-700"
+        >Start From Date</label
+      >
+      <input
+        id="startFromDate"
+        formControlName="startFromDate"
+        type="datetime-local"
+        class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+      />
+    </div>
+
+    <!-- Repeat Until -->
+    <div>
+      <div class="flex items-center space-x-2">
+        <i class="bx bx-repeat"></i>
+        <label for="repeatUntil" class="block text-sm font-medium text-gray-700"
+          >Repeat Until</label
+        >
+      </div>
+      <input
+        id="repeatUntil"
+        formControlName="repeatUntil"
+        type="datetime-local"
+        class="mt-1 block w-full border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+      />
+    </div>
+  </form>
+</p-dialog>

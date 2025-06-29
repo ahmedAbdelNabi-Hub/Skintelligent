@@ -1,0 +1,50 @@
+<app-admin-header></app-admin-header>
+<app-sidebar [menuItems]="[
+  {
+    title: 'Dashboard',
+    items: [
+      {
+        label: 'Overview',
+        icon: 'bx-category-alt',
+        route: '/admin-dashboard',
+      },
+ 
+      {
+        label: 'Clinics',
+        icon: 'bx-building-house',
+        route: 'manage-clinics',
+      },
+      {
+        label: 'Doctors',
+        icon: 'bx bx-droplet',
+        route: 'doctors',
+      },
+      {
+        label: 'Patients',
+        icon: 'bx-group',
+        route: 'patients',
+      },
+    ],
+  },
+  {
+    title: 'System Settings & Configuration',
+    items: [
+
+      {
+        label: 'System',
+        icon: 'bx-cog',
+        route: '/admin-dashboard/settings',
+      },
+      {
+        label: 'Manage Users ',
+        icon: 'bx-group',
+        route: 'users',
+      } ,
+    ],
+  },
+]" [doctor]="true"></app-sidebar>
+<main class="w-full mx-auto  lg:ps-[250px] mt-15 py-2 md:px-4">
+    <router-outlet></router-outlet>
+</main>
+<app-toast></app-toast>
+<app-email-box></app-email-box>

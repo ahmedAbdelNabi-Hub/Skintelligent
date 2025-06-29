@@ -1,0 +1,188 @@
+<div class="container mx-auto px-4 py-8" @fadeAnimation>
+  <div class="flex justify-between items-center mb-6">
+    <button
+      (click)="goBack()"
+      class="flex items-center text-blue-600 hover:text-blue-800 cursor-pointer"
+    >
+      <i class="bx bx-arrow-back text-xl mr-2"></i>
+      Back to Doctors
+    </button>
+  </div>
+
+  <app-loader *ngIf="loading"></app-loader>
+
+  <div
+    *ngIf="!loading && doctor"
+    class="bg-white rounded-lg shadow-lg overflow-hidden"
+  >
+    <!-- Doctor Header Section -->
+    <div class="bg-gradient-to-r from-blue-500 to-blue-700 p-6 text-white">
+      <div class="flex flex-col md:flex-row items-center md:items-start">
+        <img
+          [src]="doctor.profilePicture || 'assets/images/default-avatar.png'"
+          alt="{{ doctor.firstName }} {{ doctor.lastName }}"
+          class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-md mb-4 md:mb-0 md:mr-6"
+        />
+
+        <div class="text-center md:text-left">
+          <h1 class="text-2xl md:text-3xl font-bold">
+            {{ doctor.firstName }} {{ doctor.lastName }}
+          </h1>
+          <p class="text-lg opacity-90 mb-2">{{ doctor.qualification }}</p>
+          <div class="flex items-center justify-center md:justify-start mb-2">
+            <app-stars [rating]="doctor.rating || 0"></app-stars>
+            <span class="ml-2">{{ doctor.rating || 0 }} / 5</span>
+          </div>
+          <div
+            class="flex flex-wrap justify-center md:justify-start gap-2 mt-3"
+          >
+            <span class="bg-blue-800 px-3 py-1 rounded-full text-sm">{{
+              doctor.qualification
+            }}</span>
+            <span
+              *ngIf="doctor.isProfileCompleted"
+              class="bg-green-600 px-3 py-1 rounded-full text-sm"
+              >Profile Completed</span
+            >
+            <span
+              *ngIf="!doctor.isProfileCompleted"
+              class="bg-yellow-600 px-3 py-1 rounded-full text-sm"
+              >Profile Incomplete</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Doctor Details Section -->
+    <div class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Contact Information -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">
+            Contact Information
+          </h2>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="bx bx-envelope text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Email</p>
+                <p class="text-gray-800">{{ doctor.email }}</p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="bx bx-phone text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Phone</p>
+                <p class="text-gray-800">
+                  {{ doctor.phoneNumber || "Not provided" }}
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="bx bx-map text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Address</p>
+                <p class="text-gray-800">
+                  {{ doctor.address || "Not provided" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Information -->
+        <div class="bg-gray-50 p-4 rounded-lg">
+          <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">
+            Professional Information
+          </h2>
+          <div class="space-y-3">
+            <div class="flex items-center">
+              <i class="bx bx-certification text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Qualification</p>
+                <p class="text-gray-800">
+                  {{ doctor.qualification || "Not provided" }}
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="bx bx-briefcase text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Experience</p>
+                <p class="text-gray-800">
+                  {{ doctor.experienceYears || "Not provided" }} years
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="bx bx-id-card text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">License Number</p>
+                <p class="text-gray-800">
+                  {{ doctor.licenseNumber || "Not provided" }}
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="bx bx-money text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Consultation Fee</p>
+                <p class="text-gray-800">
+                  {{ doctor.defaultConsultationFee || "Not provided" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Biography -->
+        <div class="bg-gray-50 p-4 rounded-lg md:col-span-2">
+          <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">
+            Biography
+          </h2>
+          <p class="text-gray-700">
+            {{ doctor.aboutMe || "No biography provided." }}
+          </p>
+        </div>
+
+        <!-- Examination Fee -->
+        <div class="bg-gray-50 p-4 rounded-lg md:col-span-2">
+          <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">
+            Fees
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center">
+              <i class="bx bx-money-withdraw text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Examination Fee</p>
+                <p class="text-gray-800">
+                  {{ doctor.defaultExaminationFee || "Not provided" }}
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <i class="bx bx-money text-blue-600 text-xl mr-3"></i>
+              <div>
+                <p class="text-sm text-gray-500">Consultation Fee</p>
+                <p class="text-gray-800">
+                  {{ doctor.defaultConsultationFee || "Not provided" }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Message -->
+  <div
+    *ngIf="!loading && error"
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+    role="alert"
+  >
+    <strong class="font-bold">Error!</strong>
+    <span class="block sm:inline">{{ error }}</span>
+  </div>
+</div>

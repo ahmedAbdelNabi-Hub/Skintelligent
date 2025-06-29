@@ -1,0 +1,176 @@
+<div class="w-full min-h-screen bg-gradient-to-b from-gray-50 to-white absolute left-1 top-14 z-[1000]">
+  <button [routerLink]="['/clinic-dashboard']" routerLinkActive="router-link-active"
+    class="absolute top-4 border rounded-lg bg-blue-500 text-white flex items-center justify-center px-4 py-2 right-4 hover:bg-blue-600 transition-colors">
+    <i class="bx bx-arrow-back mr-2"></i>Go back
+  </button>
+
+  <div class="text-center py-12 flex items-center justify-center flex-col">
+    <div *ngIf="errorMessage" class="text-white bg-red-500 max-w-md px-4 rounded-lg py-2 text-center text-sm mb-4">
+      <i class="bx bx-error-circle mr-2"></i>{{ errorMessage }}
+    </div>
+    <h1 class="text-3xl font-bold mb-3 text-gray-900">Choose Your Perfect Plan</h1>
+    <p class="text-lg text-gray-600 max-w-xl">Unlock the full potential of your clinic with our comprehensive subscription plans designed for healthcare professionals</p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 max-w-screen-xl mx-auto">
+    <!-- Free Plan -->
+    <div class="bg-white rounded-xl border border-gray-200 p-8 flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+      <div class="mb-6">
+        <div class="flex items-center mb-4">
+          <i class="bx bx-gift text-2xl text-blue-500 mr-2"></i>
+          <h2 class="text-2xl font-bold text-gray-800">Free</h2>
+        </div>
+        <div class="flex items-baseline mb-4">
+          <span class="text-4xl font-bold text-gray-900">$0</span>
+          <span class="text-lg text-gray-500 ml-2">/month</span>
+        </div>
+        <p class="text-gray-600">Default plan for new clinics to get started</p>
+      </div>
+
+      <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-600">
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Single Clinic Management</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Up to 4 Doctors Profile Creation</span>
+        </li>
+        <li class="flex items-center text-gray-400">
+          <i class="bx bx-x-circle text-lg text-red-400 mr-3"></i>
+          <span>No Export Functionality</span>
+        </li>
+        <li class="flex items-center text-gray-400">
+          <i class="bx bx-x-circle text-lg text-red-400 mr-3"></i>
+          <span>Basic Filtering Options</span>
+        </li>
+      </ul>
+
+      <button disabled
+        class="w-full py-3 px-6 rounded-lg text-sm font-semibold text-white bg-gray-400 cursor-not-allowed">
+        Current Plan
+      </button>
+    </div>
+
+    <!-- Basic Plan -->
+    <div class="bg-white rounded-xl border border-gray-200 p-8 flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+      <div class="mb-6">
+        <div class="flex items-center mb-4">
+          <i class="bx bx-package text-2xl text-blue-500 mr-2"></i>
+          <h2 class="text-2xl font-bold text-gray-800">Basic</h2>
+        </div>
+        <div class="flex items-baseline mb-4">
+          <span class="text-4xl font-bold text-gray-900">$3</span>
+          <span class="text-lg text-gray-500 ml-2">/month</span>
+        </div>
+        <p class="text-gray-600">Perfect for clinics just getting started with digital healthcare management</p>
+      </div>
+
+      <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-600">
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Unlimited Access to Doctor Appointments</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Up to 10 Doctors Profile Creation</span>
+        </li>
+        <li class="flex items-center text-gray-400">
+          <i class="bx bx-x-circle text-lg text-red-400 mr-3"></i>
+          <span>Basic Email Notifications</span>
+        </li>
+        <li class="flex items-center text-gray-400">
+          <i class="bx bx-x-circle text-lg text-red-400 mr-3"></i>
+          <span>Basic Analytics Dashboard</span>
+        </li>
+      </ul>
+
+      <button (click)="pay('basic', 3.0)" [disabled]="isLoading"
+        class="w-full py-3 px-6 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-[1.02]">
+        {{ isLoading ? 'Processing...' : 'Start Basic Plan' }}
+      </button>
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="bg-white rounded-xl border-2 border-blue-500 p-8 flex flex-col relative hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+      <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+        <span class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-md">Most Popular</span>
+      </div>
+
+      <div class="mb-6">
+        <div class="flex items-center mb-4">
+          <i class="bx bx-crown text-2xl text-blue-500 mr-2"></i>
+          <h2 class="text-2xl font-bold text-blue-600">Pro</h2>
+        </div>
+        <div class="flex items-baseline mb-4">
+          <span class="text-4xl font-bold text-gray-900">$10</span>
+          <span class="text-lg text-gray-500 ml-2">/month</span>
+        </div>
+        <p class="text-gray-600">Advanced features and tools for growing medical practices</p>
+      </div>
+
+      <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-600">
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Unlimited Doctor Appointments & Profiles</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Advanced Patient Management System</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>SMS & Email Notification System</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Comprehensive Analytics & Reports</span>
+        </li>
+      </ul>
+
+      <button (click)="pay('pro', 10.0)" [disabled]="isLoading"
+        class="w-full py-3 px-6 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-[1.02]">
+        {{ isLoading ? 'Processing...' : 'Upgrade to Pro' }}
+      </button>
+    </div>
+
+    <!-- Enterprise Plan -->
+    <div class="bg-white rounded-xl border border-gray-200 p-8 flex flex-col hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
+      <div class="mb-6">
+        <div class="flex items-center mb-4">
+          <i class="bx bx-building text-2xl text-blue-500 mr-2"></i>
+          <h2 class="text-2xl font-bold text-gray-800">Enterprise</h2>
+        </div>
+        <div class="flex items-baseline mb-4">
+          <span class="text-4xl font-bold text-gray-900">$20</span>
+          <span class="text-lg text-gray-500 ml-2">/month</span>
+        </div>
+        <p class="text-gray-600">Customized solutions for large healthcare organizations</p>
+      </div>
+
+      <ul class="space-y-4 mb-8 flex-grow text-sm text-gray-600">
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>All Pro Features Included</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>24/7 Priority Support & Training</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Custom API Integration Options</span>
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check-circle text-lg text-green-500 mr-3"></i>
+          <span>Dedicated Success Manager</span>
+        </li>
+      </ul>
+
+      <button (click)="pay('enterprise', 20.0)" [disabled]="isLoading"
+        class="w-full py-3 px-6 rounded-lg text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-[1.02]">
+        {{ isLoading ? 'Processing...' : 'Contact Sales Team' }}
+      </button>
+    </div>
+  </div>
+</div>

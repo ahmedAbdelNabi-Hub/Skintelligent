@@ -1,0 +1,198 @@
+<div class="relative w-full mx-auto bg-transparent p-4 rounded-lg font-sans text-gray-900 space-y-4">
+  <!-- Action Buttons -->
+ 
+
+  <!-- Note Modal -->
+  <div *ngIf="isModalOpen" class="fixed top-0 w-full h-full inset-0 bg-black/30 flex items-center justify-center z-50">
+    <div class="bg-white rounded-xl p-4 w-full max-w-[600px] mx-auto transform transition-all duration-300 scale-100">
+      <app-text-editor [reportId]="reportId"></app-text-editor>
+      <div class="flex justify-end gap-2 mt-3">
+        <button (click)="closeNoteModal()"
+          class="px-3 py-1.5 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-all duration-200 text-sm">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="flex justify-between items-start border-b border-gray-300 pb-3">
+    <div>
+      <h1 class="text-xl font-semibold text-gray-900">Dermatological Report</h1>
+      <p class="text-xs text-gray-600">Date: {{sessionDate | date}} | ID: {{sessionId}}</p>
+    </div>
+    <!-- <div class="relative w-20 h-20">
+      <img
+        [src]="image" class="w-20 h-20 rounded-md object-cover border-2 border-gray-200 hover:border-blue-500 transition-colors duration-200" />
+      <div
+        class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white">
+      </div>
+    </div> -->
+  </div>
+
+  <div class="w-full bg-white px-4 rounded-lg text-black ">
+    <div class="flex items-center  justify-between gap-4 ">
+      <div *ngIf="diagnoses.length" class="mb-4">
+
+        <h3 class="text-lg font-bold text-gray-900 mb-2">Diagnoses</h3>
+        <ul class="space-y-1.5">
+          <li *ngFor="let item of diagnoses" class="flex items-center gap-2 text-gray-700">
+            <span class="w-1 h-1 rounded-full bg-red-500"></span>
+            <span class="font-bold text-blue-900 text-sm">{{ item }}</span>
+          </li>
+        </ul>
+      </div>
+      <div class=" rounded-lg p-2">
+        <div class="flex flex-col items-center">
+          <img [src]="'http://skintelligent.runasp.net/'+''+image" alt="Clinical Image"
+            class="rounded-lg w-full max-w-[200px]" />
+          <div class="flex items-center gap-2 mt-2">
+            <p class="text-xs text-gray-600">Clinical presentation</p>
+            <button
+              class="flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200 transition-colors text-xs">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Discuss
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="text-lg -mt-4  mb-1">Report Summary</h2>
+    <span class="text-gray-600 text-xs block mb-4">Comprehensive analysis of patient's dermatological condition</span>
+    <div *ngIf="summary" class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <h3 class="font-medium text-black text-sm mb-1">Patient Symptoms</h3>
+          <ul class="list-disc list-inside text-gray-700 text-xs">
+            <li class=" " *ngFor="let symptom of summary.Patient_symptoms">{{ symptom }}</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-medium text-black text-sm mb-1">Location</h3>
+          <p class="text-gray-700 text-xs">{{ summary.Symptom_location }}</p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <h3 class="font-medium text-black text-sm mb-1">Duration</h3>
+          <p class="text-gray-700 text-xs">{{ summary.Duration }}</p>
+        </div>
+
+        <div>
+          <h3 class="font-medium text-black text-sm mb-1">Progression</h3>
+          <p class="text-gray-700 text-xs">{{ summary.Symptom_progression }}</p>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="font-medium text-black text-sm mb-1">Risk Factors</h3>
+        <p class="text-gray-700 text-xs">{{ summary.Risk_factors }}</p>
+      </div>
+    </div>
+
+    <div *ngIf="!summary" class="text-red-600 text-center py-3 text-xs">
+      <p>Summary data is not available or is invalid.</p>
+    </div>
+  </div>
+
+
+  <!-- <div class="bg-gray-50 p-3 rounded-lg text-xs">
+    <h2 class="font-medium mb-2">Clinical Impression</h2>
+    <p class="text-gray-700 mb-2">Benign presentation with stable characteristics.</p>
+    <ul class="list-disc list-inside space-y-1 text-gray-700">
+      <li>Monitor changes</li>
+      <li>Document progression</li>
+      <li>Follow-up as needed</li>
+    </ul>
+  </div> -->
+
+  <div class="border-t border-gray-300 pt-3 mt-4 text-xs">
+    <div class="flex justify-between items-end">
+      <div class="flex items-center gap-2">
+        <div class="flex items-center space-x-1 cursor-pointer">
+          <div
+            class="w-6 h-6 rounded-md bg-blue-700 text-white flex items-center justify-center border border-gray-200">
+            <i class="bx text-xl bxl-vk"></i>
+          </div>
+          <p class="text-black font-medium">Skintelligent</p>
+        </div> <span class="text-gray-500">Generated on {{sessionDate | date}}</span>
+      </div>
+      <div class="text-right text-gray-600">
+        <p>SkinTelligent AI Report</p>
+        <p class="font-medium">CONFIDENTIAL</p>
+        <p class="text-[10px] mt-0.5">Page 1 of 1</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fixed Notes Icon Button -->
+<div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 flex items-center gap-4">
+  <button (click)="toggleNotes()"
+    class="px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg hover:shadow-blue-200 hover:scale-105 transition-all duration-200 flex items-center gap-3 group"
+    title="Show Notes">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 group-hover:animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+    <span class="text-sm font-medium">Notes</span>
+  </button>
+
+  <button (click)="openNoteModal()"
+    class="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-gray-900 to-gray-800 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 text-sm backdrop-blur-sm">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+    </svg>
+    <span>Add Note</span>
+  </button>
+</div>
+<!-- Notes Sidebar Panel -->
+<div
+  class="fixed top-0 right-0 h-full w-96 bg-white shadow-xl border-l border-gray-200 z-40 transition-all duration-300 ease-in-out"
+  [class.translate-x-full]="!notesVisible">
+  <div class="flex justify-between items-center px-6 py-4 border-b bg-gray-50">
+    <div class="flex items-center gap-2">
+      <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+      <h2 class="text-lg font-semibold">Doctor Notes</h2>
+    </div>
+    <button (click)="toggleNotes()" class="p-2 hover:bg-gray-200 rounded-full transition-colors duration-200">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="p-6 overflow-y-auto h-[calc(100%-72px)]">
+    <div *ngIf="notes.length === 0" class="flex flex-col items-center justify-center text-gray-500 py-8">
+      <svg class="w-12 h-12 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+      </svg>
+      <p class="text-sm">No notes available.</p>
+    </div>
+
+    <div *ngFor="let note of notes" class="bg-gray-50 rounded-lg p-4 mb-4">
+      <div class="text-sm text-gray-700" [innerHTML]="note.note"></div>
+      <div class="flex items-center gap-2 mt-3 text-xs text-gray-500">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        {{ note.createdAt | date:'short' }}
+      </div>
+      <button class="text-red-500 mt-2 hover:text-red-700" (click)="deleteNote(note.id)" title="Delete note">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

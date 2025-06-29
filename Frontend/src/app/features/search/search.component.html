@@ -1,0 +1,183 @@
+<app-navbar [role]="'patient'"></app-navbar>
+<div class="search-page-container">
+  <div class="results-content">
+    <div class="search-form-container veezeeta-style-search card-style">
+      <h2 class="form-title">Find a Doctor</h2>
+      <div class="search-filters">
+        <div class="filter-item">
+          <label for="insurance">Insurance</label>
+          <select
+            id="insurance"
+            [(ngModel)]="searchCriteria.insurance"
+            class="form-control"
+          >
+            <option value="">Choose insurance</option>
+            <option value="none">None</option>
+            <option value="axa">AXA</option>
+          </select>
+        </div>
+        <div class="filter-item search-name-item">
+          <label for="doctorName">Doctor Name</label>
+          <input
+            type="text"
+            id="doctorName"
+            placeholder="Enter name"
+            [(ngModel)]="searchCriteria.name"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <button
+        (click)="onSearch()"
+        class="btn btn-primary search-button-veezeeta"
+      >
+        <i class="fas fa-search"></i> Search
+      </button>
+    </div>
+    <div class="header-controls">
+      <h2>
+        Search Results
+        <span class="doctor-count" *ngIf="doctors && doctors.length > 0"
+          >{{ doctors.length }} Doctors Found</span
+        >
+        <span class="doctor-count" *ngIf="doctors && doctors.length === 0"
+          >No Doctors Found</span
+        >
+      </h2>
+      <div class="sorting-control">
+        <label for="sort-by">Sort by:</label>
+        <select id="sort-by" class="form-control">
+          <option value="best-match">Best Match</option>
+          <option value="rating">Rating</option>
+          <option value="fees-low-high">Fees: Low to High</option>
+          <option value="fees-high-low">Fees: High to Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      class="gap-5 grid grid-cols-1 lg:grid-cols-2"
+      *ngIf="doctors && doctors.length > 0"
+    >
+      <div *ngFor="let doctor of doctors" class="doctor-card-new card-style">
+        <div class="doctor-card-main-content">
+          <div class="doctor-info">
+            <div class="doctor-main">
+              <img
+                [src]="doctor.profilePicture || 'assets/default-doctor.png'"
+                alt="{{ doctor.firstName + ' ' + doctor.lastName }}"
+                class="doctor-image"
+              />
+              <div class="doctor-details">
+                <h3 class="doctor-name">
+                  {{ doctor.firstName + " " + doctor.lastName }}
+                </h3>
+                <p class="specialty">
+                  {{ doctor.qualification || "Not Provided" }}
+                </p>
+                <div class="rating">
+                  <app-stars [rating]="doctor?.rating || 0"></app-stars>
+                  <span class="rating-text"
+                    >{{ doctor?.rating || "4.5" }} ({{
+                      doctor.reviewCount || 0
+                    }}
+                    reviews)</span
+                  >
+                </div>
+                <div class="badges">
+                  <span class="badge primary-badge"
+                    ><i class="fas fa-medal"></i> Top Rated</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="doctor-secondary-details">
+              <p>
+                <i class="fas fa-stethoscope"></i>
+                {{
+                  doctor.qualification ||
+                    "Pediatric Dentistry, Cosmetic Dentistry, Endodontics"
+                }}
+              </p>
+              <p>
+                <i class="fas fa-map-marker-alt"></i>
+                {{ doctor.address || "Nasr City: 61 Tayaran Street" }}
+              </p>
+              <p>
+                <i class="fas fa-money-bill-wave"></i> Fees:
+                <strong>{{ doctor.defaultExaminationFee || "200" }} EGP</strong>
+              </p>
+              <p>
+                <i class="fas fa-clock"></i> Waiting Time:
+                {{ doctor.waitingTime || "15" }} Minutes
+              </p>
+              <p class="discount-info" *ngIf="doctor.discountOffer">
+                <i class="fas fa-tag"></i> {{ doctor.discountOffer }}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <button
+            class="bg-blue-500 p-2 rounded-md text-white w-32 cursor-pointer"
+            (click)="bookAppointment(doctor)"
+          >
+            BOOK
+          </button>
+        </div>
+        <div
+          *ngIf="expandedDoctorId === doctor.id"
+          class="expanded-availability-menu"
+        >
+          <div class="all-appointment-times">
+            <h4>All Available Times</h4>
+            <div class="appointment-times-list">
+              <button
+                class="time-slot btn btn-outline-primary"
+                *ngFor="
+                  let time of [
+                    '9:00 AM',
+                    '9:30 AM',
+                    '10:00 AM',
+                    '10:30 AM',
+                    '11:00 AM',
+                    '11:30 AM',
+                    '12:00 PM',
+                    '12:30 PM',
+                    '1:00 PM',
+                    '1:30 PM',
+                    '2:00 PM',
+                    '2:30 PM',
+                    '3:00 PM',
+                    '3:30 PM',
+                    '4:00 PM',
+                    '4:30 PM',
+                    '5:00 PM',
+                    '5:30 PM',
+                    '6:00 PM',
+                    '6:30 PM',
+                    '7:00 PM',
+                    '7:30 PM',
+                    '8:00 PM',
+                    '8:30 PM',
+                    '9:00 PM'
+                  ]
+                "
+              >
+                {{ time }}
+              </button>
+            </div>
+            <button
+              class="close-expanded-menu btn btn-secondary mt-2"
+              (click)="toggleDoctorAvailability(doctor.id)"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

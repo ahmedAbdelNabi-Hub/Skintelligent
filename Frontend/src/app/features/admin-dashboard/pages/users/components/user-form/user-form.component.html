@@ -1,0 +1,110 @@
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="px-5 relative py-4">
+ 
+  <div
+    class="flex bg-white px-6 py-6 rounded-xl relative shadow-sm max-w-[700px] justify-center flex-col space-y-4 w-full mx-auto">
+    <div class="absolute  right-2 top-2 ">
+      <button type="button" (click)="closeModal()" class="text-gray-500 bg-white border border-gray-200 rounded-md flex items-center  px-1 py-1 hover:text-gray-700">
+        <i class='bx bx-x text-3xl'></i>
+      </button>
+    </div>
+    <!-- Form Header -->
+    <div class="text-center mb-4">
+      <h2 class="text-2xl font-bold text-gray-800 mb-2">Create New Admin</h2>
+      <p class="text-sm text-gray-600">Fill in the information below to create a new admin account</p>
+    </div>
+
+    <!-- UserName Field -->
+    <div class="space-y-2">
+      <label for="userName" class="block text-sm font-medium text-gray-700">Username</label>
+      <div
+        class="p-1.5 flex flex-col sm:flex-row items-center gap-2 border border-gray-200 rounded-lg  transition-colors">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3">
+            <i class='bx bxs-user-circle text-xl text-gray-500'></i>
+          </div>
+          <input type="text" id="userName" formControlName="userName"
+            class="py-2 outline-none border-none focus:border-none  ps-9 pe-3 block w-full rounded-lg sm:text-sm bg-transparent"
+            placeholder="Enter your username">
+        </div>
+      </div>
+      <p class="text-xs text-gray-500">Choose a unique username for your admin account</p>
+    </div>
+    <p *ngIf="submitted && f['userName'].errors" class="text-red-500 text-xs mt-1">
+      * Username is required and must be at least 3 characters.
+    </p>
+
+    <!-- Email Field -->
+    <div class="space-y-2">
+      <label for="email" class="block text-sm font-medium text-gray-700">Email Address</label>
+      <div
+        class="p-1.5 flex flex-col sm:flex-row items-center gap-2 border border-gray-200 rounded-lg  transition-colors">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3">
+            <i class='bx bx-envelope text-xl text-gray-500'></i>
+          </div>
+          <input type="email" id="email" formControlName="email"
+            class="py-2  outline-none border-none focus:border-none ps-9 pe-3 block w-full rounded-lg sm:text-sm bg-transparent"
+            placeholder="Enter your email address">
+        </div>
+      </div>
+      <p class="text-xs text-gray-500">We'll use this email for account recovery and notifications</p>
+    </div>
+    <p *ngIf="submitted && f['email'].errors" class="text-red-500 text-xs mt-1">
+      * Valid email is required.
+    </p>
+
+    <!-- Password Field -->
+    <div class="space-y-2">
+      <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+      <div
+        class="p-1.5 flex flex-col sm:flex-row items-center gap-2 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3">
+            <i class='bx bx-lock-alt text-xl text-gray-500'></i>
+          </div>
+          <input type="password" id="password" formControlName="password"
+            class="py-2 outline-none border-none focus:border-none ps-9 pe-3 block w-full rounded-lg sm:text-sm bg-transparent"
+            placeholder="Enter your password">
+        </div>
+      </div>
+      <p class="text-xs text-gray-500">Use at least 6 characters with a mix of letters and numbers</p>
+    </div>
+    <p *ngIf="submitted && f['password'].errors" class="text-red-500 text-xs mt-1">
+      * Password is required and must be at least 6 characters.
+    </p>
+
+    <!-- Phone Field -->
+    <div class="space-y-2">
+      <label for="phone" class="block text-sm font-medium text-gray-700">Phone Number</label>
+      <div
+        class="p-1.5 flex flex-col sm:flex-row items-center gap-2 border border-gray-200 rounded-lg hover:border-blue-500 transition-colors">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3">
+            <i class='bx bx-phone text-xl text-gray-500'></i>
+          </div>
+          <input type="text" id="phone" formControlName="phone"
+            class="py-2 outline-none border-none focus:border-none ps-9 pe-3 block w-full rounded-lg sm:text-sm bg-transparent"
+            placeholder="Enter your phone number">
+        </div>
+      </div>
+      <p class="text-xs text-gray-500">Enter a valid phone number (10-15 digits)</p>
+    </div>
+    <p *ngIf="submitted && f['phone'].errors" class="text-red-500 text-xs mt-1">
+      * Valid phone number is required (10-15 digits).
+    </p>
+
+    <!-- Submit Button -->
+    <div class="pt-4">
+      <button *ngIf="!(_asyncDataHandler.isLoading$ | async)" type="submit"
+        class="py-2.5 px-5 rounded-lg text-center w-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Create Admin Account
+      </button>
+      <div *ngIf="(_asyncDataHandler.isLoading$ | async)"
+        class="py-2.5 px-5 rounded-lg text-center w-full bg-blue-600 text-white flex items-center justify-center space-x-2">
+        <span class="loader"></span>
+        <span>Creating account...</span>
+      </div>
+    </div>
+
+  </div>
+</form>

@@ -1,0 +1,313 @@
+<!-- Table Section -->
+<div class="container  md:px-3 mx-auto box-shadow">
+	<!-- Header -->
+	<div
+		class="px-6 border border-gray-200 rounded-t-md py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+		<div class="flex items-center gap-x-3">
+
+			<div>
+				<h2 class="text-xl font-semibold text-gray-800">
+					Manage Clinics Dashboard
+				</h2>
+				<p class="text-sm text-gray-600">
+					Manage clinic accounts with full administrative privileges
+					<span class="text-blue-500">- Block, Activate, or Delete accounts</span>
+				</p>
+			</div>
+		</div>
+
+		<div>
+			<div class="inline-flex gap-x-2">
+				<div class="relative w-[400px]">
+					<div class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
+						<svg class="shrink-0 size-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24"
+							height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+							stroke-linecap="round" stroke-linejoin="round">
+							<circle cx="11" cy="11" r="8"></circle>
+							<path d="m21 21-4.3-4.3"></path>
+						</svg>
+					</div>
+					<input [formControl]="searchControl"
+						class="py-[5px] border text-black ps-10 pe-4 block w-full border-gray-400 rounded-md sm:text-sm "
+						type="text" role="combobox" aria-expanded="false" placeholder="Search With full Name / Address"
+						value="" data-hs-combo-box-input="">
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<div class="flex flex-col px-0 md:px-3 box-shadow rounded-lg">
+	<div class="-m-1.5 overflow-x-auto">
+		<div class="p-1.5 min-w-full inline-block align-middle">
+			<div class="flex  items-center mt-10 justify-center  " *ngIf="(asyncDataHandler.isLoading$ | async)">
+				<span class="loader"></span>
+			</div>
+			<div *ngIf="!(asyncDataHandler.isLoading$ | async)" class="bg-white  shadow-2xs overflow-hidden">
+				<table class="min-w-full border border-gray-200 overflow-x-scroll ">
+					<thead class="bg-gray-50">
+						<tr>
+							<th scope="col" class="px-3 py-3  text-start">
+								<div class="flex items-center gap-x-2">
+									<span class="text-xs font-semibold uppercase text-gray-800">CLINIC USER</span>
+								</div>
+							</th>
+							<th scope="col" class="px-3 ps-12 py-3 text-start">
+								<div class="flex items-center gap-x-2">
+									<span class="text-xs font-semibold uppercase text-gray-800">Address</span>
+								</div>
+							</th>
+							<th scope="col" class="px-3 py-3 text-start">
+								<div class="flex items-center gap-x-2">
+									<span class="text-xs font-semibold uppercase text-gray-800">Doctors</span>
+								</div>
+							</th>
+
+							<th scope="col" class="px-3 py-3  text-start">
+								<div class="flex items-center gap-x-2">
+									<span class="text-xs font-semibold uppercase text-gray-800">Status</span>
+								</div>
+							</th>
+
+							<th scope="col" class="px-3 py-3 text-start">
+								<div class="flex items-center gap-x-2">
+									<span class="text-xs font-semibold uppercase text-gray-800">Phone</span>
+								</div>
+							</th>
+							<th scope="col" class="px-3 py-3 text-start">
+								<div class="flex items-center gap-x-2">
+									<span class="text-xs font-semibold uppercase text-gray-800">Created</span>
+								</div>
+							</th>
+
+							<th scope="col" class=" py-3 text-end "></th>
+						</tr>
+					</thead>
+
+					<tbody class="divide-y divide-gray-200">
+						<tr (click)="clinicInfo(clinic.id)" class="cursor-pointer  hover:bg-green-50"
+							*ngFor="let clinic of clinics()">
+							<td class="size-px whitespace-nowrap ">
+								<div class="px-3 py-3">
+									<div class="flex grow items-center w-[180px] whitespace-nowrap gap-x-2">
+										<img class="size-6 md:size-8 rounded-full" loading="lazy" [src]="clinic.image"
+											alt="clinic image">
+										<div class="flex flex-col ">
+											<span class="text-sm text-gray-600 font-medium line-clamp-1 ">
+												{{clinic.clinicName}}
+											</span>
+											<div class="flex items-center space-x-1">
+												<i class='bx bx-envelope text-blue-800'></i>
+												<span
+													class="text-sm text-gray-600 line-clamp-1 ">{{clinic.email}}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</td>
+							<td class="size-px ps-12  min-w-54 ">
+								<div class="px-3 py-3">
+									<div class="grow">
+										<span class="text-sm text-gray-600 line-clamp-2 ">
+											{{clinic.address}}
+										</span>
+									</div>
+								</div>
+							</td>
+							<td class="size-11 whitespace-nowrap">
+								<div class="flex -space-x-2 px-3 py-3">
+									<div *ngFor="let email of clinic.emails.slice(0,5)"
+										class="size-8 text-sm rounded-full text-white flex items-center justify-center uppercase ring-white border-3 border-blue-100"
+										[ngStyle]="{'background-color': '#' + Math.floor(Math.random()*16777215).toString(16)}">
+										{{email.slice(0,2)}}
+									</div>
+									<div class="relative inline-flex">
+										<button
+											class="inline-flex p-1 items-center justify-center size-8 rounded-full bg-gray-100 border-2 border-blue-100 font-medium text-gray-700 shadow-2xs align-middle hover:bg-gray-200 focus:outline-hidden focus:bg-gray-300 text-sm"
+											aria-haspopup="menu" aria-expanded="false" aria-label="Dropdown">
+											<span class="font-medium">{{clinic.emails.length}}+</span>
+										</button>
+									</div>
+								</div>
+							</td>
+
+							<td class="size-px whitespace-nowrap">
+								<div class="px-3 py-3">
+									<span
+										class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium rounded-full"
+										[ngClass]="!clinic.lock ? 'bg-red-100 text-red-800' : 'bg-teal-100 text-teal-800'">
+
+										<!-- If Blocked -->
+										<ng-container *ngIf="!clinic.lock; else activeBlock">
+											<!-- Lock Icon -->
+											<svg class="size-3" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+												viewBox="0 0 16 16">
+												<path
+													d="M8 1a3 3 0 0 0-3 3v3H4a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-7a1 1 0 0 0-1-1h-1V4a3 3 0 0 0-3-3zm-1 3a1 1 0 1 1 2 0v3H7V4z" />
+											</svg>
+											Blocked Account
+										</ng-container>
+
+										<!-- If Active -->
+										<ng-template #activeBlock>
+											<!-- Check Icon -->
+											<svg class="size-2.5" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+												viewBox="0 0 16 16">
+												<path
+													d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z">
+												</path>
+											</svg>
+											Active Account
+										</ng-template>
+
+									</span>
+								</div>
+							</td>
+
+
+							<td class="size-px whitespace-nowrap ">
+								<div class="px-3 py-3 flex items-center space-x-1">
+									<i class='bx bx-phone-call text-sm'></i>
+									<span class="text-sm text-gray-600">+{{clinic.contactNumber}}</span>
+								</div>
+							</td>
+							<td class="size-px whitespace-nowrap ">
+								<div class="px-3 py-3">
+									<span class="text-sm text-gray-600">{{clinic.createdDate | date:"yyyy-mm-dd
+										HH:SS"}}</span>
+								</div>
+							</td>
+							<td class="size-px whitespace-nowrap ">
+								<div class=" py-1.5">
+									<div class="hs-dropdown [--placement:bottom-right] relative inline-block">
+
+										<app-dropdown [dropdownId]="clinic.id" [activeDropdown]="activeDropdown"
+											(toggle)="setActiveDropdown($event)">
+											<button dropdown-button id="hs-table-dropdown-1" type="button"
+												class="hs-dropdown-toggle py-1.5 px-2 inline-flex justify-center items-center gap-2 rounded-lg text-gray-700 align-middle disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
+												<svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+													width="24" height="24" viewBox="0 0 24 24" fill="none"
+													stroke="currentColor" stroke-width="2" stroke-linecap="round"
+													stroke-linejoin="round">
+													<circle cx="12" cy="12" r="1"></circle>
+													<circle cx="19" cy="12" r="1"></circle>
+													<circle cx="5" cy="12" r="1"></circle>
+												</svg>
+											</button>
+											<div dropdown-body
+												class="duration  divide-y divide-gray-200 min-w-40 z-10 bg-white shadow-2xl rounded-lg p-2 mt-2">
+												<div *ngIf="clinic.lock" (click)="stopPropagation($event)"
+													(click)="setIdAndActivateModal('Block',clinic.id)"
+													class="py-3 first:pt-0 last:pb-0">
+													<a
+														class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100">
+														Block
+													</a>
+
+												</div>
+												<div *ngIf="!clinic.lock" (click)="stopPropagation($event)"
+													(click)="setIdAndActivateModal('active',clinic.id)"
+													class="py-3 first:pt-0 last:pb-0">
+													<a
+														class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100">
+														Activate </a>
+
+												</div>
+												<div (click)="stopPropagation($event)"
+													(click)="setIdAndActivateModal('Delete',clinic.id)"
+													class="py-2 first:pt-0 last:pb-0">
+													<a
+														class="flex items-center gap-x-3 py-2 px-3 rounded-lg text-sm text-red-600 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500">
+														Delete
+													</a>
+												</div>
+											</div>
+										</app-dropdown>
+									</div>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div
+					class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border  rounded-b-md border-gray-200">
+					<div>
+						<p class="text-sm text-gray-600">
+							<span class="font-semibold text-gray-800">{{ pagination?.count || 0 }}</span> results
+						</p>
+					</div>
+					<div>
+						<div class="inline-flex gap-x-2">
+							<button type="button" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+								class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+								<svg class="size-3" width="16" height="16" viewBox="0 0 16 15" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M10.506 1.64001L4.85953 7.28646C4.66427 7.48172 4.66427 7.79831 4.85953 7.99357L10.506 13.64"
+										stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+								</svg>
+								Prev
+							</button>
+							<button type="button" (click)="goToPage(currentPage + 1)"
+								[disabled]="currentPage === totalPages"
+								class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+								Next
+								<svg class="size-3" width="16" height="16" viewBox="0 0 16 16" fill="none"
+									xmlns="http://www.w3.org/2000/svg">
+									<path
+										d="M4.50598 2L10.1524 7.64645C10.3477 7.84171 10.3477 8.15829 10.1524 8.35355L4.50598 14"
+										stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+								</svg>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<app-clinic-details @fadeAnimation *ngIf="(_clinicService.IsClinicDetails$ |async)"></app-clinic-details>
+<app-modal [isOpen]="activeModal === 'Delete' || activeModal === 'Block' || activeModal === 'active'"
+	(closeModal)="activeModal = null">
+	<div class="size-full fixed top-0 start-0 z-[80] overflow-x-hidden overflow-y-auto pointer-events-none">
+		<div class=" sm:max-w-lg sm:w-full m-3 sm:mx-auto min-h-[calc(100%-3.5rem)] flex items-center">
+			<div class="w-full flex flex-col bg-white border border-gray-200 shadow-sm rounded-xl pointer-events-auto">
+				<div class="flex justify-between items-center py-3 px-4 border-b border-gray-200">
+					<h2 *ngIf="activeModal=='Delete'" class="text-xl font-bold mb-4">Delete Clinic Account</h2>
+					<h2 *ngIf="activeModal=='Block'" class="text-xl font-bold mb-4">Block Clinic Account</h2>
+				</div>
+				<div class="p-4 overflow-y-auto">
+					<p *ngIf="activeModal=='Delete'" class="mt-1 text-gray-800">
+						Are you sure you want to Delete this clinic?All Information the clinic will have Deleted.
+					</p>
+					<p *ngIf="activeModal=='Block'" class="mt-1 text-gray-800">
+						Are you sure you want to Block this clinic Account ?
+					</p>
+					<p *ngIf="activeModal=='active'" class="mt-1 text-gray-800">
+						Are you sure you want to activate this clinic Account ?
+					</p>
+				</div>
+				<div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t border-gray-200">
+					<button (click)="deleteClinicAccount()" *ngIf="activeModal=='Delete'" type="button"
+						class="py-2 px-3  inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+						Delete
+					</button>
+					<button *ngIf="activeModal === 'Block'" type="button" (click)="BlockClinicAccount()"
+						class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+						Block
+					</button>
+					<button *ngIf="activeModal === 'active'" type="button" (click)="BlockClinicAccount()"
+						class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+						Active
+					</button>
+					<button type="button" (click)="activeModal=null"
+						class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-[#eee]  hover:bg-white ">
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</app-modal>

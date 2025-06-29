@@ -1,0 +1,130 @@
+<div class="flex flex-col bg-white relative overflow-hidden  border border-gray-200  rounded-xl">
+  <div class="absolute overflow-hidden  inset-0 blur-xl h-[580px]" style="
+          background: linear-gradient(
+            143.6deg,
+            rgba(192, 132, 252, 0) 20.79%,
+            rgba(88, 144, 255, 0.088) 10.92%,
+            rgba(204, 171, 238, 0) 70.35%
+          );
+        "></div>
+  <div class="p-4 md:py-3 md:px-4 flex  gap-x-4">
+    <!-- <div
+                    class="shrink-0 flex border border-gray-300 justify-center items-center size-11 bg-white rounded-lg">
+                    <img class="w-[24px]" [src]="icon" loading="lazy" alt="">
+                </div> -->
+
+    <div class="grow">
+      <div class="flex items-center justify-between gap-x-2">
+        <p class="text-[15px]  font-medium uppercase ">
+          {{label}}
+        </p>
+        <div class="relative group inline-block">
+          <!-- Icon -->
+          <svg class="shrink-0 size-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+            <path d="M12 17h.01" />
+          </svg>
+
+          <!-- Tooltip -->
+          <span
+            class="absolute  -left-40 w-[180px] top-1/2 ml-2  opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-200 z-10 py-1 px-2 bg-gray-900 text-xs font-medium text-white rounded-md shadow-lg"
+            role="tooltip">
+            The number of daily users
+          </span>
+        </div>
+
+      </div>
+      <div class="mt-5 flex items-center  gap-x-2">
+        <h3 class="text-2xl font-medium text-gray-800">
+          {{ amount | number }} <span class="text-sm text-gray-700">{{ currency }}</span>
+        </h3>
+      
+      </div>
+      <div class="flex items-center  mt-1">
+        <p class="text-sm text-gray-500">Obtaining data for All System</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- 
+               data: [10, 15, 14, 20, 18, 16, 30, 60, 22, 25, 18, 20], // Bar values
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    fill: {
+        colors: [
+          '#D1D5DB', '#D1D5DB', '#D1D5DB', '#D1D5DB',
+          '#D1D5DB', '#D1D5DB', '#D1D5DB', '#3B82F6', // Blue (August)
+          '#D1D5DB', '#D1D5DB', '#D1D5DB', '#D1D5DB'
+        ]
+      },
+          
+      
+       @ViewChild("chart") chart!: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
+
+  constructor() {
+    this.chartOptions = {
+      series: [
+        {
+          name: "Sessions",
+          data: [10, 15, 14, 20, 18, 16, 30, 60, 22, 25, 18, 20], // Bar values
+        }
+      ],
+      chart: {
+        type: "bar",
+        height: 100,
+        sparkline: {
+          enabled: true
+        }
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "25%", // Thin bars
+          borderRadius: 4,
+          distributed: true
+        }
+      },
+      fill: {
+        colors: [
+          '#D1D5DB', '#D1D5DB', '#D1D5DB', '#D1D5DB',
+          '#D1D5DB', '#D1D5DB', '#D1D5DB', '#3B82F6', // Blue (August)
+          '#D1D5DB', '#D1D5DB', '#D1D5DB', '#D1D5DB'
+        ]
+      },
+      dataLabels: {
+        enabled: false
+      },
+      xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+       show:true,
+        labels: {
+          style: {
+            fontSize: "12px",
+            colors: "#111"
+          }
+        },
+        axisTicks: { show: false },
+        axisBorder: { show: false },
+        tooltip: { enabled: false }
+      },
+      yaxis: {
+        show: false
+      },
+    
+      tooltip: {
+        enabled: false
+      },
+      grid: {
+        show: false
+      }
+    };
+  }
+}
+
+            
+            -->

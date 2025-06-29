@@ -1,0 +1,84 @@
+<app-admin-header
+  (onToggleSideBar)="showSidebar = !showSidebar"
+></app-admin-header>
+<app-sidebar
+  (onToggleSidebar)="showSidebar = !showSidebar"
+  [showSidebar]="showSidebar"
+  [menuItems]="[
+
+  {
+    title: 'Dashboard',
+    items: [
+      {
+        label: 'Overview',
+        icon: 'bx-category-alt',
+        route: '/doctor-dashboard',
+      },
+      {
+        label: 'Appointments',
+        icon: 'bx-calendar',
+        route: '/doctor-dashboard/appointment',
+      },
+      {
+        label: 'Patients',
+        icon: 'bx-user',
+        route: '/doctor-dashboard/patient',
+      },
+      {
+        label: 'Reports',
+        icon: 'bx-file',
+        route: '/doctor-dashboard/reports',
+      }
+    ],
+  },
+  {
+    title: 'Practice Management',
+    items: [
+      {
+        label: 'Schedule',
+        icon: 'bx-time',
+        route: '/doctor-dashboard/schedule',
+      },
+    
+      {
+        label: 'Community',
+        icon: 'bx-group',
+        route: '/doctor-dashboard/community',
+      },
+
+      {
+        label: 'AI Chat',
+        icon: 'bx-bot font-bold text-blue ',
+        route: '/doctor-dashboard/reports',
+      }
+    ],
+  },
+  {
+    title: 'Account & Settings',
+    items: [
+      {
+        label: 'Profile',
+        icon: 'bx-user-circle',
+        route: '/doctor-dashboard/profile',
+      },
+      {
+        label: 'Settings',
+        icon: 'bx-cog',
+        route: '/doctor-dashboard/settings',
+      }
+    ],
+  }
+]"
+  [doctor]="true"
+></app-sidebar>
+
+<main
+  [ngClass]="{ 'lg:ps-[260px]': showSidebar }"
+  class="w-full bg-gray-50 overflow-x-hidden lg:ps-[260px] mt-12 py-2 px-1 md:px-4"
+>
+  <div [@fadeAnimation]="prepareRoute(outlet)">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</main>
+<app-toast></app-toast>
+<app-email-box></app-email-box>

@@ -1,0 +1,19 @@
+.container {
+  max-width: 1200px;
+}
+
+.doctor-avatar {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.doctor-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+}

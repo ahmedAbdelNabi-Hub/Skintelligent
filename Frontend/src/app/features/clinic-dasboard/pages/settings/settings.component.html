@@ -1,0 +1,180 @@
+<div class="p-6 space-y-6 max-w-4xl flex flex-col">
+  <h2 class="text-2xl font-semibold text-gray-800">
+    Doctor Constraints Settings
+  </h2>
+  <form
+    class="flex flex-col space-y-6"
+    [formGroup]="settingsForm"
+    (ngSubmit)="saveSettings()"
+  >
+    <!-- Working Days -->
+    <p-multiSelect
+      [options]="daysOfWeek"
+      formControlName="workingDays"
+      optionLabel="label"
+      defaultLabel="Select Working Days"
+      class="w-full"
+    ></p-multiSelect>
+    <div
+      *ngIf="f['workingDays'].touched && f['workingDays'].invalid"
+      class="text-red-500 text-xs"
+    >
+      Please select at least one working day.
+    </div>
+
+    <!-- Time Off -->
+    <p-calendar
+      formControlName="timeOff"
+      selectionMode="range"
+      placeholder="Select Time Off Range"
+      showIcon
+      class="w-full"
+    ></p-calendar>
+
+    <!-- Max Appointments Per Day -->
+    <div>
+      <label class="block mb-1 text-gray-700">Max Appointments / Day</label>
+      <p-inputNumber
+        formControlName="maxAppointmentsPerDay"
+        [min]="1"
+        [max]="50"
+        class="w-full"
+      ></p-inputNumber>
+      <div
+        *ngIf="
+          f['maxAppointmentsPerDay'].touched &&
+          f['maxAppointmentsPerDay'].invalid
+        "
+        class="text-red-500 text-xs"
+      >
+        Value must be between 1 and 50.
+      </div>
+    </div>
+
+    <!-- Slot Duration -->
+    <div>
+      <label class="block mb-1 text-gray-700"
+        >Appointment Duration (minutes)</label
+      >
+      <p-slider
+        formControlName="slotDuration"
+        [step]="5"
+        [min]="5"
+        [max]="60"
+      ></p-slider>
+      <p class="mt-1 text-sm text-gray-600">
+        Current: {{ settingsForm.value.slotDuration }} mins
+      </p>
+      <div
+        *ngIf="f['slotDuration'].touched && f['slotDuration'].invalid"
+        class="text-red-500 text-xs"
+      >
+        Value must be between 5 and 60.
+      </div>
+    </div>
+
+    <!-- Allowed Time Range -->
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <label class="block mb-1 text-gray-700">Start Time</label>
+        <p-calendar
+          formControlName="startTime"
+          [timeOnly]="true"
+          hourFormat="24"
+          showIcon
+          class="w-full"
+        ></p-calendar>
+        <div
+          *ngIf="f['startTime'].touched && f['startTime'].invalid"
+          class="text-red-500 text-xs"
+        >
+          Start time is required.
+        </div>
+      </div>
+      <div>
+        <label class="block mb-1 text-gray-700">End Time</label>
+        <p-calendar
+          formControlName="endTime"
+          [timeOnly]="true"
+          hourFormat="24"
+          showIcon
+          class="w-full"
+        ></p-calendar>
+        <div
+          *ngIf="f['endTime'].touched && f['endTime'].invalid"
+          class="text-red-500 text-xs"
+        >
+          End time is required.
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Toggle -->
+    <div class="flex items-center space-x-4">
+      <label class="text-gray-700">Enable Notifications</label>
+      <p-toggleButton
+        formControlName="notifications"
+        onLabel="On"
+        offLabel="Off"
+      ></p-toggleButton>
+    </div>
+
+    <!-- Max Patients Per Hour -->
+    <div>
+      <label class="block mb-1 text-gray-700">Max Patients / Hour</label>
+      <p-inputNumber
+        formControlName="maxPerHour"
+        [min]="1"
+        [max]="10"
+        class="w-full"
+      ></p-inputNumber>
+      <div
+        *ngIf="f['maxPerHour'].touched && f['maxPerHour'].invalid"
+        class="text-red-500 text-xs"
+      >
+        Value must be between 1 and 10.
+      </div>
+    </div>
+
+    <!-- Auto Close Slot Time -->
+    <div>
+      <label class="block mb-1 text-gray-700"
+        >Auto-cancel Appointment After (mins)</label
+      >
+      <p-inputNumber
+        formControlName="closeBeforeMinutes"
+        [min]="5"
+        [max]="60"
+        class="w-full"
+      ></p-inputNumber>
+      <div
+        *ngIf="
+          f['closeBeforeMinutes'].touched && f['closeBeforeMinutes'].invalid
+        "
+        class="text-red-500 text-xs"
+      >
+        Value must be between 5 and 60.
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <div class="pt-4">
+      <button
+        (click)="saveSettings()"
+        type="submit"
+        [disabled]="settingsForm.invalid || loading"
+        label="Save Settings"
+        icon="pi pi-save"
+        class="w-full p-button-success bg-blue-500 text-white p-3 cursor-pointer"
+      >
+        Save Settings
+      </button>
+      <div *ngIf="successMessage" class="text-green-600 mt-2">
+        {{ successMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="text-red-600 mt-2">
+        {{ errorMessage }}
+      </div>
+    </div>
+  </form>
+</div>

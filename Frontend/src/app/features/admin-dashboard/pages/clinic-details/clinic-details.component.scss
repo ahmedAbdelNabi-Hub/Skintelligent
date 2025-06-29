@@ -1,0 +1,22 @@
+
+  
+  .active {
+    border-bottom: 2px solid #2563eb; /* Blue border */
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    font-weight: bold;
+    color: #2563eb; /* Blue text */  }
+  
+    .clinic-details-content {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Center content */
+        width: 80%;
+        max-width: 500px;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+      

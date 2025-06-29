@@ -1,0 +1,15 @@
+:host ::ng-deep .p-button {
+    margin-inline: 4px !important;
+    background-color: #ffffff !important;
+    color: black !important;
+    border: 1px solid rgb(175, 175, 175) !important;
+    padding-top:5px !important;
+    padding-bottom: 5px !important;
+    padding-inline: 4px !important;
+    margin-top: 2px;
+  }
+
+:host ::ng-deep .p-menu-item-icon {
+    color: rgb(255, 255, 255) !important;
+}
+  

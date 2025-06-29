@@ -1,0 +1,51 @@
+<app-admin-header (onToggleSideBar)="showSidebar = !showSidebar"></app-admin-header>
+<app-sidebar (onToggleSidebar)="showSidebar = !showSidebar" [showSidebar]="showSidebar" [menuItems]="[
+{
+  title: 'Dashboard',
+  items: [
+    {
+      label: 'Overview',
+      icon: 'bx bxs-dashboard',
+      route: '/clinic-dashboard',
+    },
+    {
+      label: 'Doctors',
+      icon: 'bx bxs-user-plus text-blue-500',
+      route: '/clinic-dashboard/doctors',
+    },
+    {
+      label: 'Appointments',
+      icon: 'bx bxs-calendar-check',
+      route: '/clinic-dashboard/appointments',
+    },
+    {
+      label: 'Feedback',
+      icon: 'bx bxs-message-square-detail',
+      route: '/clinic-dashboard/feedback',
+    },
+    {
+        label: 'Community',
+        icon: 'bx-group',
+        route: '/clinic-dashboard/community',
+    }
+
+  ],
+},
+{
+  title: 'System Management',
+  items: [
+    {
+      label: 'Settings',
+      icon: 'bx bxs-cog',
+      route: '/clinic-dashboard/settings',
+    },
+  ],
+},
+]"></app-sidebar>
+<main [ngClass]="{ 'lg:ps-[260px]': showSidebar }" class="w-full duration-300 transition mt-15 py-5 md:px-6">
+  <div [@routingAnimation]="getRouteAnimationData()">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+<app-toast></app-toast>
+<app-email-box></app-email-box>

@@ -1,0 +1,194 @@
+<div class="flex flex-col min-h-screen">
+  <app-navbar></app-navbar>
+
+  <main class="flex-grow container mx-auto px-4 py-8 mt-10">
+    <div class="flex lg:flex-row flex-col gap-8">
+      <!-- Doctor Details Section (2 columns) -->
+      <div
+        class="w-full lg:w-[60%] md:col-span-2 bg-white rounded-lg shadow-lg p-6"
+      >
+        <div class="flex items-start gap-6">
+          <!-- Doctor Image -->
+          <div class="w-32 h-32 rounded-full overflow-hidden">
+            <img
+              [src]="doctor?.profilePicture || 'assets/default-doctor.png'"
+              alt="Doctor's profile picture"
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Doctor Info -->
+          <div class="flex-grow">
+            <h1 class="text-2xl font-bold text-gray-800">
+              {{ doctor?.firstName + " " + doctor?.lastName }}
+            </h1>
+            <div class="flex flex-col gap-2">
+              <p class="text-lg text-gray-600">
+                {{ doctor?.qualification || "Not Provided" }}
+              </p>
+              <p class="text-gray-600">
+                <span class="font-semibold">License:</span>
+                {{ doctor?.licenseNumber }}
+              </p>
+              <p class="text-gray-600">
+                <span
+                  class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm"
+                >
+                  {{ doctor?.experienceYears }} Years Experience
+                </span>
+                <span
+                  class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+                  *ngIf="doctor?.isActive"
+                >
+                  Active
+                </span>
+                <span
+                  class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm"
+                  *ngIf="!doctor?.isActive"
+                >
+                  Inactive
+                </span>
+              </p>
+
+              <div class="flex items-center gap-4">
+                <app-stars [rating]="doctor?.rating"></app-stars>
+                <span class="text-gray-500">({{ doctor?.rating }} / 5)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Professional Details -->
+        <div class="bg-white rounded-lg shadow-lg p-6">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">
+            Book Appointment
+          </h2>
+          <!-- Calendar component will go here -->
+          <div class="calendar-container">
+            <!-- Calendar implementation -->
+            <app-appointments-calendar
+              [selectedDate]="selectedDate"
+              [doctorId]="doctor?.id"
+              (onAppointmentSelected)="selectedAppointment = $event"
+              [isSelectedAppointmentBooked]="isSelectedAppointmentBooked"
+            ></app-appointments-calendar>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calendar Section (1 column) -->
+      <div
+        class="w-full lg:w-[40%] bg-white rounded-lg shadow-lg p-6 overflow-x-scroll"
+      >
+        <h2 class="text-xl font-semibold text-gray-800 mb-4">
+          Select The Appointment Day
+        </h2>
+        <!-- Calendar component will go here -->
+        <div class="calendar-container mb-5 w-full">
+          <!-- Calendar implementation -->
+          <p-datepicker
+            [(ngModel)]="selectedDate"
+            [inline]="true"
+            [showWeek]="true"
+          />
+        </div>
+        <!-- Clinic Information -->
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">
+            Select The Clinic
+          </h2>
+          <p-selectButton
+            [options]="justifyOptions"
+            [(ngModel)]="selectedClinic"
+            optionLabel="justify"
+            class="mb-4"
+          >
+            <ng-template let-item pTemplate="item">
+              <img class="w-8 h-8 object-cover rounded-md" [src]="item.image" />
+
+              <span class="ml-2 whitespace-nowrap">{{ item.justify }}</span>
+            </ng-template>
+          </p-selectButton>
+
+          <div
+            class="bg-gray-50 p-4 rounded-lg"
+            *ngIf="doctor?.clinics && selectedClinic"
+          >
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 class="font-semibold text-gray-700">
+                  {{ doctor.clinics[selectedClinic.value].clinicName }}
+                </h3>
+                <p class="text-gray-600">
+                  {{
+                    doctor.clinics[selectedClinic.value].address ||
+                      "Address not provided"
+                  }}
+                </p>
+              </div>
+              <div>
+                <div class="flex flex-col gap-2">
+                  <p class="text-gray-600">
+                    <span class="font-semibold">Consultation Fee:</span>
+                    {{
+                      doctor.clinics[selectedClinic.value].consultationFee ||
+                        doctor?.defaultConsultationFee ||
+                        0
+                    }}
+                    EGP
+                  </p>
+                  <p class="text-gray-600">
+                    <span class="font-semibold">Examination Fee:</span>
+                    {{
+                      doctor.clinics[selectedClinic.value].examinationFee ||
+                        doctor?.defaultExaminationFee ||
+                        0
+                    }}
+                    EGP
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="bg-gray-50 p-4 rounded-lg mt-4"
+            *ngIf="selectedAppointment"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center space-x-3">
+                <i class="bx bx-time text-blue-600 text-xl"></i>
+                <div>
+                  <h3 class="font-semibold text-gray-800">
+                    Selected Time Slot
+                  </h3>
+                  <p class="text-gray-600">
+                    {{ selectedAppointment?.startTime | date : "shortTime" }} -
+                    {{ selectedAppointment?.endTime | date : "shortTime" }}
+                  </p>
+                </div>
+              </div>
+              <span
+                class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm"
+              >
+                Available
+              </span>
+            </div>
+          </div>
+          <button
+            [disabled]="!selectedAppointment || !selectedClinic"
+            (click)="bookAppointment()"
+            class="disabled:opacity-50 disabled:pointer-events-none mt-6 w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-200 cursor-pointer"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-footer></app-footer>
+</div>
+<app-toast></app-toast>
+
+<p-toast autoZIndex="false" baseZIndex="201"></p-toast>

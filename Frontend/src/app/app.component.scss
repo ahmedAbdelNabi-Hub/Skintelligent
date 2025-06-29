@@ -1,0 +1,128 @@
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  /* font-family: Roboto, "Helvetica Neue", sans-serif; */
+}
+.box-shadow{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.font-mont {
+  font-family: "Montserrat", sans-serif;
+}
+
+@keyframes float1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-10px, 0);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.triangle-float1 {
+  animation: float1 5s infinite;
+}
+
+@keyframes float2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-5px, -5px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.triangle-float2 {
+  animation: float2 4s infinite;
+}
+
+@keyframes float3 {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(0, -10px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.triangle-float3 {
+  animation: float3 6s infinite;
+}
+
+.mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+  background-color: #6a43ff !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background-color: #6a43ff !important; /*inner circle color change*/
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #6a43ff !important; /*outer ring color change*/
+}
+
+:root {
+  --scroll-size: 15px;
+  --scroll-radius: 20px;
+  --scroll-track: rgb(255 255 255 / 10%);
+  --scroll-thumb: linear-gradient(45deg, #6a43ff, #a68eff);
+}
+
+::-webkit-scrollbar {
+  width: var(--scroll-size, 10px);
+  height: var(--scroll-size, 10px);
+}
+::-webkit-scrollbar-track {
+  background-color: var(--scroll-track, transparent);
+  border-radius: var(--scroll-track-radius, var(--scroll-radius));
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--scroll-thumb-color, grey);
+  background-image: var(--scroll-thumb, none);
+  border-radius: var(--scroll-thumb-radius, var(--scroll-radius));
+}
+
+.mat-paginator-icon {
+  color: white !important;
+}
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #FFF;
+  animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}

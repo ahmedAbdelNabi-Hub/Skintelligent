@@ -1,0 +1,61 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4 ">
+  <div class=" w-full space-y-8 bg-white p-8 ">
+    <!-- Success Icon -->
+    <div class="text-center">
+      <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+        <i class="bx bx-check text-4xl text-green-600"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-900 mb-2">Payment Successful!</h2>
+      <p class="text-gray-600">Thank you for upgrading your subscription. Your payment has been processed successfully.
+      </p>
+    </div>
+
+    <!-- Order Details -->
+    <div class="mt-8 border-t border-gray-200 pt-6">
+      <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+        <span>Transaction ID</span>
+        <span class="font-medium">TXN123456789</span>
+      </div>
+      <div class="flex items-center justify-between text-sm text-gray-600 mb-4">
+        <span>Date</span>
+        <span class="font-medium">{{time | date:'medium'}}</span>
+      </div>
+    </div>
+
+    <!-- Next Steps -->
+    <div class="mt-8 space-y-4">
+      <h3 class="text-lg font-medium text-gray-900">Next Steps</h3>
+      <ul class="space-y-3">
+        <li class="flex items-start">
+          <i class="bx bx-right-arrow-alt text-blue-500 mt-1 mr-2"></i>
+          <span class="text-gray-600">Your account has been upgraded with new features</span>
+        </li>
+        <li class="flex items-start">
+          <i class="bx bx-right-arrow-alt text-blue-500 mt-1 mr-2"></i>
+          <span class="text-gray-600">You can now access all premium features</span>
+        </li>
+        <li class="flex items-start">
+          <i class="bx bx-right-arrow-alt text-blue-500 mt-1 mr-2"></i>
+          <span class="text-gray-600">Check your email for the payment receipt</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Action Button -->
+    <div class="mt-8">
+      <button (click)="goToDashboard()"
+        class="w-full flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200">
+        <i class="bx bx-home-alt mr-2"></i>
+        Go to Dashboard
+      </button>
+    </div>
+
+    <!-- Support Link -->
+    <div class="text-center mt-6">
+      <a href="#" class="text-sm text-blue-600 hover:text-blue-800 flex items-center justify-center">
+        <i class="bx bx-help-circle mr-1"></i>
+        Need help? Contact support
+      </a>
+    </div>
+  </div>
+</div>

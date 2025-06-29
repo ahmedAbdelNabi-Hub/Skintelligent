@@ -1,0 +1,55 @@
+<div *ngIf="showEmailComposer()" @emailAnimation class="fixed bg-[#9999991c] z-[1000] bottom-0 flex px-7 py-2 items-end justify-end w-full h-full">
+    <div class="w-[500px] bg-white border rounded-lg border-gray-100 max-w-[600px]    box-shadow">
+        <div class="py-2 flex bg-[#eee] space-x-2 px-3 justify-between items-center rounded-t-lg">
+            <h2 class="text-[14px] text-gray-900 font-medium">New Message</h2>
+            <div class="flex space-x-2 items-center">
+                <i (click)="toggleEmailComposer()" class='bx bx-x text-[23px] font-bold text-gray-800'></i>
+            </div>
+        </div>
+        <div class="relative bg-white  rounded-lg">
+
+            <div class="flex flex-col bg-white px-2">
+                <input placeholder="Recipients" type="text" [(ngModel)]="emailTo"
+                    class="w-full py-2.5 text-gray-800  bold-placeholder placeholder-gray-400 px-3 my-2 rounded-md text-[14px] border-b border-gray-50">
+                <input placeholder="Subject" type="text" [(ngModel)]="subject"
+                    class="w-full py-2.5 text-gray-800 bold-placeholder placeholder-gray-400 rounded-md text-[14px] px-3 border-b border-gray-100">
+                <textarea [(ngModel)]="body"
+                    class="h-[200px] px-3 py-1 block rounded-md my-1 outline-none border-x border-gray-50 sm:text-sm  "></textarea>
+            </div>
+            <div *ngIf="attachments.length > 0">
+                <div *ngFor="let file of attachments"
+                class="mt-2 bg-gray-100 border m-3 border-gray-200 text-sm text-gray-600  py-2 px-2  " role="alert" tabindex="-1" aria-labelledby="hs-soft-color-dark-label"
+                    role="alert" tabindex="-1" aria-labelledby="hs-solid-color-dark-label">
+                    {{ file.name }} <span id="hs-solid-color-dark-label" class="font-bold">
+                   ({{ (file.size / 1024).toFixed(2) }} KB) </span>
+                </div>
+            </div>
+
+
+            <div class=" inset-x-px p-2 border-t border-gray-100 ">
+                <div class="flex flex-wrap justify-between  items-center gap-2">
+                    <div class="flex items-center">
+                        <label
+                            class="inline-flex shrink-0 justify-center items-center size-8 rounded-lg text-gray-500 bg-gray-100 focus:z-10 focus:outline-hidden focus:bg-gray-100">
+                            <i class='bx bx-cloud-upload text-xl text-gray-500'></i>
+                            <input (change)="onFileSelected($event)" type="file"
+                                class="block w-0 h-0 overflow-hidden" />
+                        </label>
+                        <i class='bx bx-link bx-rotate-90 text-xl text-gray-500'></i>
+                    </div>
+                    <div class="flex items-center gap-x-1">
+                        <button *ngIf="!(_asyncDataHandler.isLoading$ | async)" type="button" (click)="sendEmail()"
+                            class="inline-flex shrink-0  justify-center items-center size-10 rounded-lg text-white bg-blue-600 hover:bg-blue-500 focus:z-10 focus:outline-hidden focus:bg-blue-500">
+                            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                fill="currentColor" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                            </svg>
+                        </button>
+                        <span *ngIf="(_asyncDataHandler.isLoading$ | async)" class="loader"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

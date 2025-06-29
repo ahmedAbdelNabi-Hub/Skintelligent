@@ -1,0 +1,94 @@
+<div class="bg-[#ffffff] z-10">
+  <!-- Sidebar -->
+  <div
+    class="transition overflow-hidden bg-[#ffffff] left-0 top-12 px-1 transition-all transform h-full fixed inset-y-0 start-0 border border-gray-200 hidden lg:block lg:translate-x-0 lg:end-auto lg:bottom-0"
+    [ngClass]="{ 'w-[250px]': showSidebar, 'w-[0px]': !showSidebar }">
+    <div class="flex items-center justify-between px-2 py-2">
+      <div class="flex items-center space-x-1">
+        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+        <span class="w-1.5 h-1.5 bg-yellow-500 rounded-full"></span>
+        <span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+      </div>
+    </div>
+
+    <div class="relative flex flex-col h-full max-h-full">
+      <div class="h-full overflow-y-auto overflow-x-hidden">
+        <nav class="hs-accordion-group p-3 w-full flex flex-col flex-wrap">
+          <ul class="flex flex-col px-1">
+            <ng-container *ngFor="let section of menuItems">
+              <p class="uppercase text-[10px] text-slate-700 mt-2 mb-2">
+                {{ section.title }}
+              </p>
+              <li *ngFor="let item of section.items">
+                <a *ngIf="item.label !='AI Chat'" routerLink="{{ item.route }}" routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  class="flex items-center py-1 mt-1 px-2 text-black rounded-sm hover:bg-gray-100 hover:text-black hover:border-gray-500">
+                  <i class="bx text-xl text-gray-600 {{ item.icon }}"></i>
+                  <span class="text-[15px] mx-2 text-gray-600">{{item.label}}</span>
+                </a>
+
+                <a *ngIf="item.label == 'AI Chat'" [routerLink]="[item.route]" 
+                [queryParams]="{ ai_chat: true }"
+                [state]="{ showMiniChat: true }"
+                  
+                  class="flex items-center py-2 mt-1 px-3 text-black rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 transition-all duration-300">
+                  <div class="relative">
+                    <i class="bx text-xl text-blue-600 {{ item.icon }}"></i>
+                    <span class="absolute top-0 right-0 w-2 h-2">
+                      <span class="absolute inline-flex h-2 w-2">
+                        <span
+                          class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                      </span>
+                    </span>
+                  </div>
+                  <span class="text-[15px] mx-2 text-blue-700">{{item.label}}</span>
+                </a>
+
+              </li>
+            </ng-container>
+            <div *ngIf="showSidebar" class="bg-white w-full">
+              <ng-container *ngIf="role === 'doctor'">
+                <div class="flex items-center justify-between p-2 bg-gray-50 rounded-md cursor-pointer"
+                  (click)="toggleAccordion()">
+                  <div class="flex items-center gap-2">
+                    <i class="bx bxs-business text-gray-500 text-xl"></i>
+                    <span class="text-sm text-gray-700">Select Clinic</span>
+                  </div>
+                  <i class="bx bx-chevron-down text-gray-500 transition-transform duration-300"
+                    [ngClass]="{ 'rotate-180': isAccordionOpen }"></i>
+                </div>
+
+                <div [@slideInOut]="isAccordionOpen ? 'in' : 'out'" class="overflow-y-auto">
+                  <div class="mt-1 gap-2 px-4 flex flex-col">
+                    <div *ngFor="let clinic of clinics"
+                      class="flex items-center gap-2 rounded-md cursor-pointer hover:bg-blue-50 group">
+                      <img [src]="clinic.image" [alt]="clinic.clinicName"
+                        class="w-7 h-7 rounded-md object-cover border-2 border-transparent group-hover:border-blue-200 transition-all duration-200" />
+                      <div class="flex flex-col">
+                        <span (click)="selectClinic(clinic)" class="text-xs text-gray-500">{{ clinic.clinicName
+                          }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+
+            <!-- Logout Button -->
+            <li class="mt-auto pt-4">
+              <button (click)="logout()"
+                class="flex items-center justify-center gap-1.5 w-full py-2 px-3 bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-500 hover:to-blue-600 text-white rounded-md shadow-sm hover:shadow transition-all duration-200 group">
+                <i class="bx bx-log-out text-lg group-hover:rotate-12 transition-transform"></i>
+                <span class="text-[13px] font-medium">Logout</span>
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div (click)="showSidebar = false; onToggleSidebar.emit()" class="fixed left-0 lg:hidden top-0 w-full h-full"
+  [ngClass]="{ hidden: !showSidebar }"></div>

@@ -1,0 +1,287 @@
+<!-- Hero -->
+<div
+    class="  relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/squared-bg-element.svg')] before:bg-no-repeat before:bg-top before:size-full before:-z-1 before:transform before:-translate-x-1/2">
+    <div class="py-4 px-4">
+        <!-- Announcement Banner -->
+        <div class="flex items-center">
+            <a class="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-xs text-gray-600 p-2 px-3 rounded-full transition hover:border-gray-300 focus:outline-hidden focus:border-gray-300"
+                href="#">
+                Export the Capital
+                <span class="flex items-center gap-x-1">
+                    <span class="border-s border-gray-200 text-blue-600 ps-2">Export</span>
+                    <svg class="shrink-0 size-4 text-blue-600" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m9 18 6-6-6-6" />
+                    </svg>
+                </span>
+            </a>
+            <div class="px-4  ">
+                <h1 class="block text-gray-800 text-2xl ">
+                    Doctors
+                </h1>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="flex  items-center justify-center  " *ngIf="(_asyncDataHandler.isLoading$ | async)">
+    <span class="loader"></span>
+</div>
+<div class="mx-auto mx-1 md:mx-3 " *ngIf="!(_asyncDataHandler.isLoading$ | async)">
+    <!-- Card -->
+    <div class="flex flex-col">
+        <div class="-m-1.5 overflow-x-auto">
+            <div class="p-1.5 min-w-full inline-block align-middle">
+                <div class="bg-white border border-gray-200 rounded-xl shadow-2xs overflow-hidden">
+                    <!-- Header -->
+                    <div
+                        class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800">
+                                DOCTORS
+                            </h2>
+                            <p class="text-sm text-gray-600">
+                                Can You Block OR Active Account OR Delete It .
+                                <span class="text-blue-500">You Have All Perimations</span>
+                            </p>
+                        </div>
+
+                        <div>
+                            <div class="inline-flex gap-x-2">
+                                <div class="relative w-[400px]">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center pointer-events-none z-20 ps-3.5">
+                                        <svg class="shrink-0 size-4 " xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <circle cx="11" cy="11" r="8"></circle>
+                                            <path d="m21 21-4.3-4.3"></path>
+                                        </svg>
+                                    </div>
+                                    <input [formControl]="searchControl"
+                                        class="py-[5px] border text-black ps-10 pe-4 block w-full border-gray-400 rounded-md sm:text-sm "
+                                        type="text" role="combobox" aria-expanded="false"
+                                        placeholder="Search With full Name / Address" value=""
+                                        data-hs-combo-box-input="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Full Name
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Address Name
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        License Number
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Qualification
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Rated
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th>
+
+                                <!-- <th scope="col" class="px-6 py-3 text-start">
+                                    <a class="group inline-flex items-center gap-x-2 text-xs font-semibold uppercase text-gray-800 hover:text-gray-500 focus:outline-hidden focus:text-gray-500"
+                                        href="#">
+                                        Patients
+                                        <svg class="shrink-0 size-3.5 text-gray-800" xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m7 15 5 5 5-5" />
+                                            <path d="m7 9 5-5 5 5" />
+                                        </svg>
+                                    </a>
+                                </th> -->
+
+                            </tr>
+                        </thead>
+
+                        <tbody class="divide-y divide-gray-200">
+                            <tr [@fadeAnimation] *ngFor="let doctor of Doctors()" class="bg-white hover:bg-gray-50">
+                                <td class="size-px w-70 min-w-50 whitespace-nowrap">
+                                        <div class="px-3 py-2 flex items-center gap-x-2">
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="hs-tooltip-toggle inline-block size-7 rounded-full ring-2 ring-white"
+                                                    [src]="doctor.profilePicture! | defaultImage" loading="lazy" alt="Avatar">
+                                            </div>
+                                            <div class="block text-sm text-blue-600 decoration-2 hover:underline">
+                                                {{doctor.firstName}} {{doctor.lastName}}</div>
+                                        </div>
+
+                                </td>
+                                <td class="h-px w-72 min-w-72">
+                                    <a class="block relative z-10" href="#">
+                                        <div *ngIf="doctor.address" class="px-6 py-2">
+                                            <p class="text-sm text-gray-500">{{doctor.address}}</p>
+                                        </div>
+                                        <div *ngIf="!doctor.address" class="px-6 py-2">
+                                            <p class="text-sm text-gray-500">No Address </p>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2">
+                                            <span
+                                                class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-gray-100 text-gray-800">
+                                                {{doctor.licenseNumber}}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px w-72 min-w-72 whitespace-wrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2">
+                                            <span
+                                                class="inline-flex items-center gap-1.5 py-1 px-2 rounded-lg text-xs font-medium bg-gray-100 text-gray-800">
+                                                {{doctor.qualification}}
+                                            </span>
+                                        </div>
+                                    </a>
+                                </td>
+                                <td class="size-px whitespace-nowrap">
+                                    <div class="px-6 py-2 flex gap-x-1">
+                                        <!-- Filled Stars -->
+                                        <ng-container *ngFor="let star of [].constructor(Math.floor(doctor.rating))">
+                                            <i class='bx bxs-star' style='color:#e7ff8c'></i>
+                                        </ng-container>
+
+                                        <!-- Optional Half Star -->
+                                        <ng-container *ngIf="doctor.rating % 1 >= 0.5">
+                                            <i class='bx bxs-star-half' style='color:#e7ff8c'></i>
+                                        </ng-container>
+
+                                        <!-- Empty Stars -->
+                                        <ng-container *ngFor="let star of [].constructor(5 - Math.ceil(doctor.rating))">
+                                            <i class='bx bx-star' style='color:#454545'></i>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                                <!-- <td class="size-px whitespace-nowrap">
+                                    <a class="block relative z-10" href="#">
+                                        <div class="px-6 py-2 flex -space-x-2">
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="hs-tooltip-toggle inline-block size-6 rounded-full ring-2 ring-white"
+                                                    src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                                                    alt="Avatar">
+                                          
+                                            </div>
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="inline-block size-6 rounded-full ring-2 ring-white"
+                                                    src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                                                    alt="Avatar">
+                                             
+                                            </div>
+                                            <div class="hs-tooltip inline-flex">
+                                                <img class="inline-block size-6 rounded-full ring-2 ring-white"
+                                                    src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80"
+                                                    alt="Avatar">
+                                              
+                                            </div>
+                                        </div>
+                                    </a>
+                                </td> -->
+                           
+                            </tr>
+                            <div *ngIf="Doctors() && Doctors().length === 0" class="flex items-center  justify-center p-6 w-full text-center">
+                                <div class="bg-white ">
+                                  <p class="text-lg text-gray-700 font-semibold">No doctors found based on your search.</p>
+                                  <p class="text-sm text-gray-500 mt-2">Please try different keywords or adjust your search filters.</p>
+                                </div>
+                              </div>
+                              
+                        </tbody>
+                    </table>
+                    <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200">
+                        <div>
+                          <p class="text-sm text-gray-600">
+                            <span class="font-semibold text-gray-800">{{ pagination?.count || 0 }}</span> results
+                        </p>
+                        </div>
+                        <div>
+                          <div class="inline-flex gap-x-2">
+                            <button type="button" (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                              <svg class="size-3" width="16" height="16" viewBox="0 0 16 15" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M10.506 1.64001L4.85953 7.28646C4.66427 7.48172 4.66427 7.79831 4.85953 7.99357L10.506 13.64"
+                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                              </svg>
+                              Prev
+                            </button>
+                            <button type="button" (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages"
+                              class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none">
+                              Next
+                              <svg class="size-3" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.50598 2L10.1524 7.64645C10.3477 7.84171 10.3477 8.15829 10.1524 8.35355L4.50598 14"
+                                  stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                              </svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Card -->
+</div>
+<!-- End Table Section -->

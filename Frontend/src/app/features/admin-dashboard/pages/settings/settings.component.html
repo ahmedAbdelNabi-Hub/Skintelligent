@@ -1,0 +1,200 @@
+<section class="px-3 md:px-8 py-2 mt-2 container mx-auto">
+    <div class="flex flex-col gap-1 border-b border-gray-200 pb-3">
+        <h3 class="text-2xl font-medium">System Administration</h3>
+        <p class="text-sm text-gray-600">Configure and manage system-wide settings and controls</p>
+    </div>
+
+
+
+    <!-- Security Settings -->
+    <!-- <div class="flex flex-col border border-gray-200 rounded-lg mt-4 p-4">
+        <div class="flex items-center mb-4">
+            <i class='bx bx-shield text-2xl text-gray-600 mr-2'></i>
+            <h4 class="text-xl font-semibold">Security Settings</h4>
+        </div>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
+                    <p class="text-[15px] font-semibold">Password Policy</p>
+                    <small class="text-[12px] text-gray-600">Set minimum password requirements</small>
+                </div>
+                <div class="w-1/2">
+                    <select
+                        class="w-full h-10 text-[14px] border border-gray-300 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Strong (12+ chars, special chars required)</option>
+                        <option>Medium (8+ chars, mixed case)</option>
+                        <option>Basic (6+ chars)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
+                    <p class="text-[15px] font-semibold">Session Timeout</p>
+                    <small class="text-[12px] text-gray-600">Set inactive session timeout duration</small>
+                </div>
+                <div class="w-1/2">
+                    <select
+                        class="w-full h-10 text-[14px] border border-gray-300 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>30 minutes</option>
+                        <option>1 hour</option>
+                        <option>2 hours</option>
+                        <option>4 hours</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Admin Profile -->
+    <div class="flex flex-col bg-white border border-gray-200 rounded-lg mt-4 p-6">
+        <div class="flex items-center mb-6">
+            <i class='bx bx-user text-3xl text-blue-600 mr-3'></i>
+            <h4 class="text-2xl font-bold text-gray-800">Admin Profile</h4>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-6">
+            <!-- Username -->
+            <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                    <p class="text-base font-semibold text-gray-700">Username</p>
+                    <small class="text-sm text-gray-500">Update admin username</small>
+                </div>
+                <div class="w-1/2">
+                    <input type="text" formControlName="username" placeholder="Enter new username"
+                        class="w-full h-11 text-base bg-gray-50 border border-gray-300 rounded-lg px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-white focus:border-blue-500"
+                        [class.border-red-500]="f['username'].invalid && f['username'].touched" />
+                    <small *ngIf="f['username'].errors?.['required'] && f['username'].touched"
+                        class="block mt-1 text-red-500 text-xs">Username is required</small>
+                    <small *ngIf="f['username'].errors?.['minlength'] && f['username'].touched"
+                        class="block mt-1 text-red-500 text-xs">Min 3 characters</small>
+                </div>
+            </div>
+            <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                    <p class="text-base font-semibold text-gray-700">Phone Number</p>
+                    <small class="text-sm text-gray-500">Update contact information</small>
+                </div>
+                <div class="w-1/2">
+                    <input type="text" formControlName="phone" placeholder="Enter phone number"
+                        class="w-full h-11 text-base bg-gray-50 border border-gray-300 rounded-lg px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-white focus:border-blue-500"
+                        [class.border-red-500]="f['phone'].invalid && f['phone'].touched" />
+                    <small *ngIf="f['phone'].errors?.['required'] && f['phone'].touched"
+                        class="block mt-1 text-red-500 text-xs">Phone is required</small>
+                    <small *ngIf="f['phone'].errors?.['pattern'] && f['phone'].touched"
+                        class="block mt-1 text-red-500 text-xs">Invalid phone number</small>
+                </div>
+            </div>
+            <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                    <p class="text-base font-semibold text-gray-700">Email</p>
+                    <small class="text-sm text-gray-500">Update Email</small>
+                </div>
+                <div class="w-1/2">
+                    <input type="email" formControlName="email" placeholder="Enter email"
+                        class="w-full h-11 text-base bg-gray-50 border border-gray-300 rounded-lg px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-white focus:border-blue-500"
+                        [class.border-red-500]="f['email'].invalid && f['email'].touched" />
+                    <small *ngIf="f['email'].errors?.['required'] && f['email'].touched"
+                        class="block mt-1 text-red-500 text-xs">email is required</small>
+                    <small *ngIf="f['email'].errors?.['pattern'] && f['email'].touched"
+                        class="block mt-1 text-red-500 text-xs">Invalid email number</small>
+                </div>
+            </div>
+
+            <div class="flex justify-end pt-4">
+                <button type="submit"
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition duration-150 ease-in-out transform hover:scale-[1.02]">
+                    Update Profile
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <div class="flex flex-col bg-white border border-gray-200 rounded-lg mt-4 p-6">
+        <form [formGroup]="changePasswordForm" (ngSubmit)="submitPassword()">
+            <div class="flex justify-between items-start">
+                <div class="flex flex-col">
+                    <p class="text-base font-semibold text-gray-700">Change Password</p>
+                    <small class="text-sm text-gray-500">Update admin password</small>
+                </div>
+                <div class="w-1/2 space-y-3">
+                    <input type="password" formControlName="oldPassword" placeholder="Current password"
+                        class="w-full h-11 text-base bg-gray-50 border border-gray-300 rounded-lg px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-white focus:border-blue-500"
+                        [class.border-red-500]="changePasswordForm.get('oldPassword')?.invalid && changePasswordForm.get('oldPassword')?.touched" />
+                    <small
+                        *ngIf="changePasswordForm.get('oldPassword')?.errors?.['required'] && changePasswordForm.get('oldPassword')?.touched"
+                        class="block mt-1 text-red-500 text-xs">Current password is required</small>
+
+                    <input type="password" formControlName="newPassword" placeholder="New password"
+                        class="w-full h-11 text-base bg-gray-50 border border-gray-300 rounded-lg px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-white focus:border-blue-500"
+                        [class.border-red-500]="changePasswordForm.get('newPassword')?.invalid && changePasswordForm.get('newPassword')?.touched" />
+                    <small
+                        *ngIf="changePasswordForm.get('newPassword')?.errors?.['required'] && changePasswordForm.get('newPassword')?.touched"
+                        class="block mt-1 text-red-500 text-xs">New password is required</small>
+                    <small
+                        *ngIf="changePasswordForm.get('newPassword')?.errors?.['minlength'] && changePasswordForm.get('newPassword')?.touched"
+                        class="block mt-1 text-red-500 text-xs">Min 6 characters</small>
+
+                    <input type="password" formControlName="confirmPassword" placeholder="Confirm new password"
+                        class="w-full h-11 text-base bg-gray-50 border border-gray-300 rounded-lg px-4 transition duration-150 ease-in-out hover:bg-gray-100 focus:bg-white focus:border-blue-500"
+                        [class.border-red-500]="changePasswordForm.get('confirmPassword')?.invalid && changePasswordForm.get('confirmPassword')?.touched" />
+                    <small
+                        *ngIf="changePasswordForm.get('confirmPassword')?.errors?.['required'] && changePasswordForm.get('confirmPassword')?.touched"
+                        class="block mt-1 text-red-500 text-xs">Password confirmation is required</small>
+                    <small
+                        *ngIf="changePasswordForm.errors?.['passwordMismatch'] && changePasswordForm.get('confirmPassword')?.touched"
+                        class="block mt-1 text-red-500 text-xs">Passwords do not match</small>
+                </div>
+            </div>
+            <div class="flex justify-end pt-4">
+                <button type="submit"
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 transition duration-150 ease-in-out transform hover:scale-[1.02]">
+                    Change Password
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- System Backup -->
+    <div class="flex flex-col border border-gray-200 rounded-lg mt-4 p-4">
+        <div class="flex items-center mb-4">
+            <i class='bx bx-cloud-download text-2xl text-gray-600 mr-2'></i>
+            <h4 class="text-xl font-semibold">System Backup & Restore</h4>
+        </div>
+        <div class="space-y-4">
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
+                    <p class="text-[15px] font-semibold">Automatic Backup</p>
+                    <small class="text-[12px] text-gray-600">Schedule system backups</small>
+                </div>
+                <div class="w-1/2">
+                    <select
+                        class="w-full h-10 text-[14px] border border-gray-300 rounded-md px-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option>Daily</option>
+                        <option>Weekly</option>
+                        <option>Monthly</option>
+                    </select>
+                </div>
+            </div>
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
+                    <p class="text-[15px] font-semibold">Manual Backup</p>
+                    <small class="text-[12px] text-gray-600">Create system backup now</small>
+                </div>
+                <div class="w-1/2">
+                    <button type="button"
+                        class="w-full h-10 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Create Backup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6 flex justify-end space-x-4">
+
+        <button type="button"
+            class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Save All Changes
+        </button>
+    </div>
+</section>

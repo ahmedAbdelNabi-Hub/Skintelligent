@@ -1,0 +1,48 @@
+<!--
+<div
+  class="max-w-sm bg-white shadow-lg rounded-2xl p-4 flex items-center space-x-4 hover:shadow-xl transition-shadow"
+>
+  <img
+    class="w-16 h-16 rounded-full object-cover"
+    [src]="doctor.imageUrl"
+    alt="{{ doctor.name }}"
+  />
+
+  <div class="flex-1">
+    <h2 class="text-lg font-semibold text-gray-800">{{ doctor.name }}</h2>
+    <p class="text-sm text-gray-500">{{ doctor.specialty }}</p>
+    <p class="text-sm text-gray-400">{{ doctor.hospital }}</p>
+  </div>
+
+  <button
+    class="bg-blue-500 text-white text-sm px-4 py-2 rounded-xl hover:bg-blue-600 transition-colors"
+    (click)="bookDoctor(doctor)"
+  >
+    Book
+  </button>
+</div> -->
+
+<div
+  class="w-full bg-white shadow-lg rounded-2xl p-4 flex flex-col items-center text-center hover:shadow-xl transition-shadow"
+>
+  <img
+    class="w-36 h-36 rounded-full object-cover mb-4"
+    [src]="doctor.profilePicture"
+    alt="{{ doctor.firstName + doctor.lastName }}"
+  />
+
+  <h2 class="text-lg font-semibold text-gray-800">
+    {{ doctor.firstName + doctor.lastName }}
+  </h2>
+  <p class="text-sm text-gray-500">{{ doctor.qualification }}</p>
+  <p class="text-sm text-gray-400 mb-4">{{ doctor.licenseNumber }}</p>
+
+  <app-stars [rating]="doctor.rating"></app-stars>
+
+  <button
+    class="bg-blue-500 text-white text-sm px-5 py-2 rounded-xl hover:bg-blue-600 transition-colors cursor-pointer"
+    (click)="seeReviews(doctor)"
+  >
+    SEE REVIEWS
+  </button>
+</div>

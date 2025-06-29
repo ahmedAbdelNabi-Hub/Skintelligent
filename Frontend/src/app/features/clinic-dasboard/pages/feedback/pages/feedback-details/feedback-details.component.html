@@ -1,0 +1,14 @@
+<div class="px-8">
+  <img
+    [src]="doctor.profilePicture"
+    class="rounded-md w-64 h-64 max-w-screen-xl object-cover"
+    alt=""
+  />
+  <app-doctor-reviews
+    [reviews]="reviews"
+    [avgRating]="doctor.rating"
+    [totalReviews]="totalReviews"
+    (onViewMoreReviewsClicked)="getReviews()"
+    [hideViewMoreReviewBtn]="hideViewMoreReviewBtn"
+  ></app-doctor-reviews>
+</div>

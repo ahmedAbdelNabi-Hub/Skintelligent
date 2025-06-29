@@ -1,0 +1,158 @@
+<main class="flex flex-col gap-10 pl-10">
+  <div class="flex items-center gap-4">
+    <h5 class="text-xl leading-8 font-semibold text-gray-900">
+      {{ today | date : "dd-MM-yyyy" }}
+    </h5>
+    <div class="flex items-center gap-2">
+      <label
+        class="hidden md:flex py-2 pl-1.5 pr-3 rounded-md bg-gray-50 border border-gray-300 items-center gap-1.5 text-xs font-medium text-gray-900 transition-all duration-500 hover:bg-gray-100 cursor-pointer"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="w-4 h-4 text-gray-500"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+          />
+        </svg>
+        <input
+          type="date"
+          [(ngModel)]="today"
+          (ngModelChange)="onDateChange($event)"
+          class="bg-transparent outline-none cursor-pointer"
+        />
+      </label>
+    </div>
+  </div>
+
+  <h1 class="font-bold text-3xl">Today's Appointments</h1>
+  <div *ngIf="loading" class="mx-auto mt-12">
+    <app-loader></app-loader>
+  </div>
+  <div
+    *ngIf="!loading && (!appointments || appointments.length === 0)"
+    class="flex flex-col items-center justify-center mt-10"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-16 w-16 text-blue-400 mb-4"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+      />
+    </svg>
+    <p class="text-gray-500 text-lg font-medium">
+      No appointments found for this date.
+    </p>
+  </div>
+  <div
+    *ngIf="!loading && appointments && appointments.length > 0"
+    class="pl-[1rem]"
+  >
+    <ol class="relative border-s border-gray-200 dark:border-gray-700">
+      <li
+        *ngFor="let appointment of appointments"
+        class="mb-10 ms-8"
+        data-aos="fade-left"
+      >
+        <span
+          class="absolute flex items-center justify-center w-6 h-6 bg-blue-100 rounded-full -start-[2.8rem] ring-8 ring-white dark:ring-gray-900 dark:bg-blue-900 mt-[0.5rem]"
+        >
+          <svg
+            class="w-2.5 h-2.5 text-blue-800 dark:text-blue-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path
+              d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"
+            />
+          </svg>
+        </span>
+        <h3 class="flex items-center mb-1 text-lg font-semibold text-gray-900">
+          From {{ appointment.timeSlot }}:00 PM to {{ appointment.timeSlot }}:00
+          PM
+          <span
+            class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-sm dark:bg-blue-900 dark:text-blue-300 ms-3"
+            >Latest</span
+          >
+        </h3>
+        <time
+          class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"
+          >Booked on January 13th, 2022</time
+        >
+        <div
+          class="p-5 mb-4 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700"
+        >
+          <time class="text-lg font-semibold text-gray-900 dark:text-white"
+            >Appointments Details</time
+          >
+          <ol class="mt-3 divide-y divide-gray-200 dark:divide-gray-700">
+            <li>
+              <a
+                href="#"
+                class="items-center gap-5 block p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <img
+                  class="inline-block size-8 rounded-full ring-2 ring-white"
+                  src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                  alt="Avatar"
+                />
+                <div class="text-gray-600 dark:text-gray-400">
+                  <div class="text-base font-normal">
+                    <span class="font-medium text-gray-900 dark:text-white"
+                      >Dr.
+                      {{
+                        appointment.doctor.firstName +
+                          " " +
+                          appointment.doctor.lastName
+                      }}</span
+                    >
+                    has an appointment with
+                    <span class="font-medium text-gray-900 dark:text-white">{{
+                      appointment.patient.firstName +
+                        " " +
+                        appointment.patient.lastName
+                    }}</span>
+                  </div>
+                  <div class="text-sm font-normal">
+                    "I wanted to share a webinar zeroheight."
+                  </div>
+                  <span
+                    class="inline-flex items-center text-xs font-normal text-gray-500 dark:text-gray-400"
+                  >
+                    <svg
+                      class="w-2.5 h-2.5 me-1"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M10 .5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19ZM8.374 17.4a7.6 7.6 0 0 1-5.9-7.4c0-.83.137-1.655.406-2.441l.239.019a3.887 3.887 0 0 1 2.082 2.5 4.1 4.1 0 0 0 2.441 2.8c1.148.522 1.389 2.007.732 4.522Zm3.6-8.829a.997.997 0 0 0-.027-.225 5.456 5.456 0 0 0-2.811-3.662c-.832-.527-1.347-.854-1.486-1.89a7.584 7.584 0 0 1 8.364 2.47c-1.387.208-2.14 2.237-2.14 3.307a1.187 1.187 0 0 1-1.9 0Zm1.626 8.053-.671-2.013a1.9 1.9 0 0 1 1.771-1.757l2.032.619a7.553 7.553 0 0 1-3.132 3.151Z"
+                      />
+                    </svg>
+                    Online
+                  </span>
+                </div>
+              </a>
+            </li>
+          </ol>
+        </div>
+      </li>
+    </ol>
+  </div>
+</main>

@@ -1,0 +1,75 @@
+<app-navbar></app-navbar>
+
+<div class="pricing-container mt-10">
+  <h1>Choose Your Plan</h1>
+  <div class="plans">
+    <div class="plan basic">
+      <h2>Basic</h2>
+      <p class="price">$0/month</p>
+      <ul class="space-y-3 mb-8 text-gray-600 flex-grow">
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>Unlimited Access to
+          doctor appointments
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>3 Doctors creation
+          limitation
+        </li>
+        <li class="flex items-center text-gray-400">
+          <i class="bx bx-x text-red-500 mr-2"></i>No notifications
+        </li>
+        <li class="flex items-center text-gray-400">
+          <i class="bx bx-x text-red-500 mr-2"></i>No exporting and filteration
+          features
+        </li>
+      </ul>
+      <button routerLink="/clinic-dashboard/subscription">Select Plan</button>
+    </div>
+    <div class="plan pro">
+      <h2>Pro</h2>
+      <p class="price">$10/month</p>
+      <ul class="space-y-3 mb-8 text-gray-600 flex-grow">
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>Unlimited Access to
+          doctor appointments
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>Unlimited Doctor
+          creations
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>All notifications
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>Exporting and
+          filteration features
+        </li>
+      </ul>
+      <button routerLink="/clinic-dashboard/subscription">Select Plan</button>
+    </div>
+    <div class="plan enterprise relative">
+      <h2>Enterprise</h2>
+      <p class="price">$20/month</p>
+
+      <ul class="space-y-3 mb-8 text-gray-600 flex-grow">
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>All Pro Benefits
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>Dedicated Support
+        </li>
+        <li class="flex items-center">
+          <i class="bx bx-check text-green-500 mr-2"></i>Custom Features
+        </li>
+      </ul>
+      <button
+        routerLink="/clinic-dashboard/subscription"
+        class="absolute bottom-5 left-1/2 -translate-x-1/2"
+      >
+        Select Plan
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

@@ -1,0 +1,15 @@
+<div class="dropdown">
+    <!-- Dropdown Button -->
+    <button (click)="toggleDropdown($event)">
+      <ng-content select="[dropdown-button]"></ng-content> 
+    </button>
+  
+    <!-- Dropdown Body -->
+    <div *ngIf="isOpen" @dropdownAnimation class="dropdown-menu" #dropdownMenu>
+      <div class="hs-dropdown relative inline-flex">    
+        <div class="duration hs-dropdown-open:opacity-100 min-w-40" role="menu">
+          <ng-content select="[dropdown-body]"></ng-content>
+        </div>
+      </div>
+    </div>
+  </div>

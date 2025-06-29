@@ -1,0 +1,307 @@
+<div class="flex flex-col lg:flex-row gap-3 mb-4">
+	<div class="bg-white rounded-2xl w-full mb-4 overflow-hidden border border-gray-200">
+		<div class="px-6 py-3 relative">
+			<div class="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl"></div>
+			<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 relative">
+				<div class="flex items-center gap-4">
+					<img [src]="clinicInfo()?.image" alt="Doctor Profile"
+						class="w-16 h-16 lg:w-18 lg:h-18 rounded-2xl object-cover border-2 border-purple-400/50 ">
+					<div>
+						<h2 class="text-sm font-medium text-gray-600">{{authService.getUserEmail()}}</h2>
+						<p class="text-xl lg:text-2xl   text-black">
+							{{clinicInfo()?.clinicName}}</p>
+					</div>
+				</div>
+				<div class="flex flex-wrap lg:flex-row gap-4">
+					<div class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 shadow-sm">
+						<i class='bx bx-map text-xl text-orange-500'></i>
+						<div>
+							<p class="text-xs text-gray-500">Location</p>
+							<p class="text-sm font-medium text-gray-700">{{clinicInfo()?.address}}</p>
+						</div>
+					</div>
+					<div class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 shadow-sm">
+						<i class='bx bx-phone text-xl text-green-500'></i>
+						<div>
+							<p class="text-xs text-gray-500">Contact</p>
+							<p class="text-sm font-medium text-gray-700">{{clinicInfo()?.contactNumber}}</p>
+						</div>
+					</div>
+					<div class="flex items-center gap-3 bg-gray-50 rounded-xl px-4 py-3 border border-gray-200 shadow-sm">
+						<i class='bx bx-check-circle text-xl text-blue-500'></i>
+						<div>
+							<p class="text-xs text-gray-500">Name</p>
+							<p class="text-sm font-medium text-gray-700">{{clinicInfo()?.clinicName}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="flex lg:mx-auto flex-col lg:flex-row  ">
+	<div class=" w-full lg:w-[50%] relative  bg-white">
+		<app-ptients-overview-chart></app-ptients-overview-chart>
+	</div>
+	<div class="grid grid-cols-1 mt-5 lg:mt-0 w-full lg:w-[50%] px-1  sm:grid-cols-2 lg:grid-cols-2 gap-4">
+		<app-dashboard-cart [label]="'Total Completed'" [amount]="dashboardData()?.totalCompletedAppointments!"
+			[currency]="'Appointments '" [percentageChange]="5.6" [isPositiveChange]="true"
+			[icon]="'../../../../../assets/1.png'" [isLoading]="false">
+		</app-dashboard-cart>
+
+		<app-dashboard-cart [label]="'Overall Booking'" [amount]="dashboardData()?.overallBookings!"
+			[currency]="'Appointments '" [percentageChange]="-0.2" [isPositiveChange]="false"
+			[icon]="'../../../../../assets/4.png'" [isLoading]="false">
+		</app-dashboard-cart>
+
+		<app-dashboard-cart [label]="'Canceled Appointments'" [amount]="dashboardData()?.totalCanceledAppointments!"
+			[currency]="'Appointments '" [percentageChange]="-4.0" [isPositiveChange]="false"
+			[icon]="'../../../../../assets/2.png'" [isLoading]="false">
+		</app-dashboard-cart>
+
+		<app-dashboard-cart [label]="'Total Active Patients'" [amount]="dashboardData()?.totalActivePatients!"
+			[currency]="'Patient'" [percentageChange]="2.1" [isPositiveChange]="true"
+			[icon]="'../../../../../assets/5.png'" [isLoading]="false">
+		</app-dashboard-cart>
+	</div>
+</div>
+<div class="flex  flex-col lg:flex-row  gap-4  mt-5 ">
+
+
+	<div class="border border-gray-100 bg-white rounded-lg px-2 w-full lg:w-[65%] overflow-x-auto  ">
+		<div class="flex flex-col">
+			<div class=" ">
+				<div class="p-1.5 w-[100%]  inline-block align-middle">
+					<div class="bg-white  ">
+						<div
+							class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-b border-gray-200">
+							<div>
+								<h2 class="text-xl font-semibold text-gray-800">
+									Upcoming Appointments - {{timeNow() | date:"yyy-MM-dd" }}
+								</h2>
+								<p class="text-sm text-gray-600">
+									Patient's Appointment
+								</p>
+							</div>
+							<div>
+								<div class="inline-flex gap-x-2">
+									<a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-green-500 text-green-50 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+										href="#">
+										View all
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="border-b  border-gray-200 hover:bg-gray-50">
+							<div
+								class="scroll-wrapper py-2 px-4 bg-white border border-blue-200 rounded-lg my-2 flex items-center mx-4">
+								<button (click)="scrollLeft()"
+									class="w-7 h-7 flex items-center justify-center border border-gray-200 bg-white shadow-2xs rounded-lg">
+									<i class='bx bx-chevrons-left'></i>
+								</button>
+
+								<div #scrollContainer
+									class="scroll-container mx-4 px-4 py-2 whitespace-nowrap overflow-x-auto">
+									<div *ngFor="let day of days"
+										class="day-item flex flex-col items-center inline-block mx-2">
+										<div class="day-name text-[13px] mb-1 font-medium">{{ day.dayName }}</div>
+										<div (click)="setDate(day.date)"
+											[ngClass]="{'bg-blue-500 text-white': IsActive === day.date,'text-gray-800 hover:bg-[#eee]': IsActive !== day.date}"
+											class="day-number cursor-pointer w-8 h-8 flex items-center justify-center border border-gray-200 shadow-2xs rounded-lg">
+											{{ day.date }}
+										</div>
+									</div>
+								</div>
+								<button (click)="scrollRight()"
+									class="w-7 h-7 flex items-center justify-center border border-gray-200 bg-white shadow-2xs rounded-lg">
+									<i class='bx bx-chevrons-right'></i>
+								</button>
+							</div>
+							<!-- Table -->
+							<table class="min-w-full divide-y divide-gray-200">
+								<thead class="bg-gray-50">
+									<tr>
+										<th scope="col" class="px-6 py-3 text-start">
+											<div class="flex items-center gap-x-2">
+												<span
+													class="text-xs font-semibold uppercase text-gray-800">Patient</span>
+											</div>
+										</th>
+										<th scope="col" class="px-6 py-3 text-start">
+											<div class="flex items-center gap-x-2">
+												<span class="text-xs font-semibold uppercase text-gray-800">Start
+													Time</span>
+											</div>
+										</th>
+										<th scope="col" class="px-6 py-3 text-start">
+											<div class="flex items-center gap-x-2">
+												<span class="text-xs font-semibold uppercase text-gray-800">End Time
+												</span>
+											</div>
+										</th>
+										<th scope="col" class="px-6 py-3 text-start">
+											<div class="flex items-center gap-x-2">
+												<span class="text-xs font-semibold uppercase text-gray-800">Phone</span>
+											</div>
+										</th>
+
+										<th scope="col" class="px-6 py-3 text-start">
+											<div class="flex items-center gap-x-2">
+												<span class="text-xs font-semibold uppercase text-gray-800">Date Of
+													Birth</span>
+											</div>
+										</th>
+										<th scope="col" class="px-6 py-3 text-end"></th>
+									</tr>
+								</thead>
+								<tbody class="divide-y divide-gray-200">
+									<tr *ngIf="!appointments()?.length" class="bg-white">
+										<td colspan="6" class="px-6 py-8 text-center">
+											<div class="flex flex-col items-center justify-center gap-2">
+												<svg class="w-12 h-12 text-gray-400" viewBox="0 0 24 24" fill="none"
+													xmlns="http://www.w3.org/2000/svg">
+													<path
+														d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+														stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+														stroke-linejoin="round" />
+												</svg>
+												<p class="mt-2 text-sm font-medium text-gray-500">No appointments found
+												</p>
+												<p class="text-sm text-gray-400">There are no appointments scheduled for
+													this date</p>
+											</div>
+										</td>
+									</tr>
+									<tr *ngFor="let i of appointments()" class="bg-white hover:bg-gray-50">
+										<td class="size-px whitespace-nowrap">
+											<div class="px-6 py-3">
+												<div class="flex items-center gap-x-2">
+													<img class="inline-block size-8 rounded-full"
+														[src]="'https://localhost:7131/image/PatientPictures/'+i.patientImage"
+														alt="Avatar">
+													<div class="grow">
+														<span
+															class="text-sm text-gray-600 dark:text-neutral-400">{{i.patientName}}</span>
+													</div>
+												</div>
+											</div>
+										</td>
+										<td class="size-px whitespace-nowrap">
+											<button type="button" class="block" aria-haspopup="dialog"
+												aria-expanded="false" aria-controls="hs-ai-invoice-modal"
+												data-hs-overlay="#hs-ai-invoice-modal">
+												<span class="block px-6 py-2">
+													<span class="text-sm text-black">
+														{{ i.timeStart | date: 'hh:mm a' }}
+													</span>
+												</span>
+											</button>
+										</td>
+										<td class="size-px whitespace-nowrap">
+											<button type="button" class="block" aria-haspopup="dialog"
+												aria-expanded="false" aria-controls="hs-ai-invoice-modal"
+												data-hs-overlay="#hs-ai-invoice-modal">
+												<span class="block px-6 py-2">
+													<span class="text-sm text-black">
+														{{ i.timeEnd| date: 'hh:mm a' }}
+													</span>
+												</span>
+											</button>
+										</td>
+										<td class="size-px whitespace-nowrap">
+											<button type="button" class="block" aria-haspopup="dialog"
+												aria-expanded="false" aria-controls="hs-ai-invoice-modal"
+												data-hs-overlay="#hs-ai-invoice-modal">
+												<span class="block px-6 py-2">
+													<span
+														class="py-1 px-1.5 inline-flex items-center gap-x-1 text-xs font-medium bg-teal-100 text-teal-800 rounded-full">{{i.phone}}</span>
+												</span>
+											</button>
+										</td>
+
+										<td class="size-px whitespace-nowrap">
+											<button type="button" class="block" aria-haspopup="dialog"
+												aria-expanded="false" aria-controls="hs-ai-invoice-modal"
+												data-hs-overlay="#hs-ai-invoice-modal">
+												<span class="block px-6 py-2">
+													<span class="text-sm text-gray-600">{{i.age |
+														date:"YYYY-MM-dd"}}</span>
+												</span>
+											</button>
+										</td>
+										<td class="size-px whitespace-nowrap">
+											<button type="button" class="block" aria-haspopup="dialog"
+												aria-expanded="false" aria-controls="hs-ai-invoice-modal"
+												data-hs-overlay="#hs-ai-invoice-modal">
+												<span class="px-6 py-1.5">
+													<span
+														class="py-1 px-2 inline-flex justify-center items-center gap-2 rounded-lg border border-gray-200 font-medium bg-white text-gray-700 shadow-2xs align-middle hover:bg-gray-50 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm">
+														<svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg"
+															width="16" height="16" fill="currentColor"
+															viewBox="0 0 16 16">
+															<path
+																d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z">
+															</path>
+															<path
+																d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z">
+															</path>
+														</svg>
+														View
+													</span>
+												</span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="border border-gray-100 bg-white rounded-lg px-2 py-1 flex flex-col space-y-2 w-full lg:w-[35%]">
+		<div>
+			<h2 class="text-xl font-semibold text-gray-800">Report Request</h2>
+			<p class="text-sm text-gray-600">
+				Patient's Report For Counselling
+			</p>
+		</div>
+		<div *ngFor="let i of [1,2,3,4,5]" class="px-2 py-3 border border-green-200 rounded-lg ">
+			<div class>
+				<div class="flex  gap-x-2">
+					<img class="inline-block size-12 lg:size-10 rounded-full"
+						src="data:image/jpeg;base64,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"
+						alt="Avatar">
+					<div class="grow flex  flex-col">
+						<span class="text-[16px] font-semibold  ">Uthman ibn Hunaif</span>
+						<span class="text-sm text-gray-500">
+							06 Feb. 11:00 am -11:45 am
+						</span>
+						<div class="flex items-center gap-x-2  mt-1">
+							<img class="inline-block size-4" src="../../../../../assets/11180756.png" alt="Avatar">
+							<div class="grow flex  flex-col">
+								<span class="text-[12px] font-semibold  ">
+									<span class="text-blue-500">(Report)</span>
+									Uthman ibn
+									Hunaif.pdf
+								</span>
+							</div>
+
+
+						</div>
+					</div>
+
+
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+
+</div>

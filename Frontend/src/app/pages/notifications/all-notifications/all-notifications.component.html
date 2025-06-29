@@ -1,0 +1,127 @@
+<div class="container mx-auto px-4">
+  <div
+    class="bg-white border border-gray-200 rounded-lg shadow-lg overflow-scroll h-[40rem]"
+  >
+    <!-- Header -->
+    <div
+      class="p-4 border-b border-gray-200 bg-gray-50 rounded-t-lg flex items-center justify-between"
+    >
+      <div class="flex items-center gap-3">
+        <span
+          class="bg-blue-100 text-blue-600 rounded-full p-1.5 grid place-items-center"
+        >
+          <i class="bx bxs-bell text-xl"></i>
+        </span>
+        <h1 class="text-xl font-semibold text-gray-800">All Notifications</h1>
+      </div>
+      <!-- Optional: Add filtering or sorting options here -->
+      <button
+        class="text-sm text-blue-600 hover:underline cursor-pointer"
+        (click)="markAllAsRead()"
+      >
+        <!-- Assuming markAllAsRead() exists in component -->
+        Mark all as read
+      </button>
+    </div>
+
+    <!-- Notification List -->
+    <div class="divide-y divide-gray-200">
+      <!-- Placeholder for empty state -->
+      <div
+        *ngIf="!isLoading && notifications?.length === 0"
+        class="p-6 text-center text-gray-500"
+      >
+        <i class="bx bx-bell-off text-4xl mb-2"></i>
+        <p>You have no notifications.</p>
+      </div>
+
+      <!-- Actual Notification Items -->
+      <ul class="overflow-y-auto divide-y divide-gray-100">
+        <!-- Example Notification Item (Unread) -->
+        <ng-container *ngIf="!isLoading">
+          <ng-container *ngFor="let notif of notifications">
+            <li
+              (click)="onNotificationClick(notif)"
+              class="p-4 hover:bg-gray-50 cursor-pointer flex items-start gap-3"
+              [ngClass]="{ 'bg-blue-50': !notif.isRead }"
+            >
+              <span
+                [ngClass]="{
+                  'bg-green-100 text-green-600':
+                    notif.type === 'book' || notif.type === 'create',
+                  'bg-purple-100 text-purple-600': notif.type === 'sheducle',
+                  'bg-yellow-100 text-yellow-600': notif.type === 'Review',
+                  'bg-red-100 text-red-600': notif.type === 'cancel'
+                }"
+                class="rounded-full p-1.5 grid place-items-center mt-1"
+              >
+                <i
+                  *ngIf="notif.type === 'book'"
+                  class="bx bx-calendar-check text-lg"
+                ></i>
+                <i
+                  *ngIf="notif.type === 'sheducle'"
+                  class="bx bx-calendar-edit text-lg"
+                ></i>
+                <i
+                  *ngIf="notif.type === 'Review'"
+                  class="bx bx-comment-detail text-lg"
+                ></i>
+                <i
+                  *ngIf="notif.type === 'create'"
+                  class="bx bx-add-to-queue"
+                ></i>
+                <i
+                  *ngIf="notif.type === 'cancel'"
+                  class="bx bx-calendar-x text-lg"
+                ></i>
+              </span>
+              <div class="flex-1">
+                <p class="text-sm font-medium text-gray-900">
+                  {{ notif.title }}
+                </p>
+                <p class="text-xs text-gray-600">
+                  {{ notif.message }}
+                </p>
+                <p class="text-xs text-gray-400 mt-1">
+                  {{ notif.createdAt | relativeTime }}
+                </p>
+              </div>
+              <span
+                *ngIf="!notif.isRead"
+                class="h-2 w-2 rounded-full bg-blue-500 mt-1"
+              ></span>
+              <!-- Unread indicator -->
+            </li>
+          </ng-container>
+        </ng-container>
+
+        <li *ngIf="isLoading" class="flex justify-center my-6">
+          <app-loader></app-loader>
+        </li>
+      </ul>
+    </div>
+
+    <button
+      *ngIf="!isLoading && !allLoaded"
+      (click)="loadMoreNotifications()"
+      class="bg-blue-500 text-white text-center p-2 w-full rounded-sm cursor-pointer"
+    >
+      SHOW MORE
+    </button>
+
+    <!-- Loading Indicator -->
+    <div *ngIf="isLoading && !allLoaded" class="p-4 text-center text-gray-500">
+      <i class="bx bx-loader-alt bx-spin text-xl"></i> Loading more
+      notifications...
+    </div>
+
+    <!-- All Loaded Indicator -->
+    <div
+      *ngIf="allLoaded && notifications && notifications!.length > 0"
+      class="p-4 text-center text-gray-400 text-sm"
+    >
+      You've reached the end of your notifications.
+    </div>
+  </div>
+</div>

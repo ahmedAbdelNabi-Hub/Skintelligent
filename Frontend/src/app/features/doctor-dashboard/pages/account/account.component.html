@@ -1,0 +1,220 @@
+<section class="mx-auto   bg-white w-full">
+    <div class="px-4">
+        <h3 class="text-2xl font-medium ">Account </h3>
+        <p class="text-sm text-gray-600">Manage your name, password and account settings.</p>
+    </div>
+    <!-- Card Section -->
+    <div class="px-2 md:px-8  "><!-- Card -->
+        <div class=" mt-10">
+            <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+                <!-- Grid -->
+                <div class="grid sm:grid-cols-12 gap-2 py-4 border-t border-stone-200 sm:gap-6">
+                    <div class="sm:col-span-3">
+                        <label class="inline-block  text-gray-800 mt-2.5">
+                            Profile photo
+                        </label>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9">
+                        <div class="flex items-center gap-5">
+                            <img class="inline-block size-16 rounded-full ring-2 ring-white"
+                                src="https://preline.co/assets/img/160x160/img1.jpg" alt="Avatar">
+                            <div class="flex gap-x-2">
+                                <div>
+                                    <button type="button"
+                                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50">
+                                        <svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                            <polyline points="17 8 12 3 7 8" />
+                                            <line x1="12" x2="12" y1="3" y2="15" />
+                                        </svg>
+                                        <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+
+                                        Upload photo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-3">
+                        <label for="af-account-full-name" class="inline-block  text-gray-800 mt-2.5">
+                            Full name
+                        </label>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9">
+                        <div class="sm:flex">
+                            <input formControlName="firstName" id="first-name" type="text"
+                                class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="Maria">
+                            <input formControlName="lastName" id="last-name" type="text"
+                                class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="Maria">
+                        </div>
+
+                    </div>
+
+                    <div class="sm:col-span-3">
+                        <div class="inline-block">
+                            <label for="af-account-phone" class="inline-block  text-gray-800 mt-2.5">
+                                Phone
+                            </label>
+
+                        </div>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9">
+                        <div class="sm:flex">
+                            <input formControlName="phoneNumber" id="af-account-phone" type="text"
+                                class="py-1.5 sm:py-2 px-3 pe-11 block w-full border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg sm:text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="+x(xxx)xxx-xx-xx">
+                        </div>
+
+                    </div>
+                    <div class="sm:col-span-3  ">
+                        <label for="af-account-gender-checkbox" class="inline-block  text-gray-800 mt-2.5">
+                            Gender
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9 pb-8 border-b border-gray-200">
+                        <div class="sm:flex  ">
+                            <label for="af-account-gender-checkbox"
+                                class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                <input type="radio" formControlName="gender" value="male" name="gender"
+                                    class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    id="af-account-gender-checkbox" checked>
+                                <span class="sm:text-sm text-gray-500 ms-3">Male</span>
+                            </label>
+                            <label for="af-account-gender-checkbox-female"
+                                class="flex py-2 px-3 w-full border border-gray-200 shadow-2xs -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none">
+                                <input formControlName="gender" value="female" name="gender" type="radio"
+                                    class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                    id="af-account-gender-checkbox-female">
+                                <span class="sm:text-sm text-gray-500 ms-3">Female</span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="sm:col-span-3">
+                        <label for="af-account-qualification" class="inline-block  text-gray-800 mt-2.5">
+                            Date Of Birth
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9">
+                        <input formControlName="dateOfBirth" id="af-account-qualification" type="date"
+                            class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="e.g., MBBS, MD, PhD in Psychology">
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="af-account-full-name" class="inline-block  text-gray-800 mt-2.5">
+                            LicenseNumber
+                        </label>
+                    </div>
+
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9">
+                        <input formControlName="licenseNumber" id="af-account-qualification" type="text"
+                            class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="LicenseNumber">
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="af-account-full-name" class="inline-block  text-gray-800 mt-2.5">
+                            Address Location
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9">
+                        <input formControlName="address" id="af-account-address" type="text"
+                            class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="Address Location">
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="af-account-full-name" class="inline-block  text-gray-800 mt-2.5">
+                            Qualification
+                        </label>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9  ">
+                        <input formControlName="qualification" id="af-account-qualification" type="text"
+                            class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="Qualification">
+                    </div>
+                    <div class="sm:col-span-3 ">
+                        <label for="af-account-full-name" class="inline-block  text-gray-800 mt-2.5">
+                            ExperienceYears
+                        </label>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="sm:col-span-9 pb-8 border-b  border-gray-200 ">
+                        <input formControlName="experienceYears" id="af-account-qualification" type="text"
+                            class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                            placeholder="ExperienceYears  , ex 5 Year">
+                    </div>
+                    <div class="sm:col-span-3">
+                        <label for="af-account-bio" class="inline-block  text-gray-800 mt-2.5 ">
+                            About Me
+                        </label>
+                    </div>
+                    <div class="sm:col-span-9">
+                        <textarea formControlName="aboutMe" id="af-account-bio"
+                            class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 checked:border-blue-500 disabled:opacity-50 disabled:pointer-events-none "
+                            rows="6" placeholder="Type your ..."></textarea>
+                    </div>
+                </div>
+
+                <div class="flex border-b border-gray-200 py-4 flex-col md:flex-row  md:items-center gap-5  ">
+                    <div class="w-full md:w-[50%]">
+                        <div class="sm:col-span-3">
+                            <label for="af-account-qualification" class="inline-block  text-gray-800 mt-2.5">
+                                ExaminationFee
+                            </label>
+                        </div>
+                        <div class="">
+                            <input formControlName="defaultExaminationFee" id="af-account-qualification" type="number"
+                                class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="e.g., 150 EGP">
+                        </div>
+                    </div>
+                    <div class="w-full md:w-[50%]">
+                        <div class="sm:col-span-3">
+                            <label for="af-account-qualification" class="inline-block  text-gray-800 mt-2.5">
+                                ConsultationFee
+                            </label>
+                        </div>
+                        <!-- End Col -->
+
+                        <div class="sm:col-span-9">
+                            <input formControlName="defaultConsultationFee" id="af-account-qualification" type="number"
+                                class="py-1.5 sm:py-2 px-3 block w-full border-gray-200 shadow-2xs rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+                                placeholder="e.g., 150 EGP">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mt-5 flex justify-end gap-x-2">
+                    <button type="button"
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-hidden focus:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-hidden focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                        Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+        <!-- End Card -->
+    </div>
+    <!-- End Card Section -->
+</section>
